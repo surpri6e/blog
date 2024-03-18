@@ -1,11 +1,12 @@
+import { Link } from 'react-router-dom';
 import './IsMe.scss';
 
 const IsMe = () => {
     return (
-        <a href='#' className='isme'>
+        <Link to={'/me'} className='isme'>
             Me
-        </a>
-    ); // HERE!!! Do hover effect
+        </Link>
+    );
 };
 
 export default IsMe;

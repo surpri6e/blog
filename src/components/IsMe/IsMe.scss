@@ -16,4 +16,10 @@
     color: inherit;
 
     background-color: lighten($grey, 20);
+
+    transition: all 150ms linear;
+
+    &:hover {
+        transform: scale(1.2);
+    }
 }
