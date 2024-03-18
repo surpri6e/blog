@@ -1,0 +1,32 @@
+@import '../../styles/vars.scss';
+
+.block {
+    width: 600px;
+
+    & > *:not(:last-child) {
+        margin-bottom: 5px;
+    }
+}
+
+.block_header {
+    display: flex;
+    align-items: center;
+
+    & > *:not(:last-child) {
+        margin-right: 10px;
+    }
+}
+
+.block_date {
+    font-size: 14px;
+    color: $grey;
+}
+
+.block_title {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.block_message {
+    font-size: 16px;
+}

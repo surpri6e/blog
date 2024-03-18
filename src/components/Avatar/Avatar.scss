@@ -1,0 +1,13 @@
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+
+    filter: grayscale(0.5);
+
+    transition: all 150ms linear;
+
+    &:hover {
+        filter: grayscale(0);
+    }
+}

@@ -1,0 +1,19 @@
+@import '../../styles/vars.scss';
+
+.isme {
+    position: fixed;
+    right: 70px; // + 20px scroll
+    bottom: 50px;
+
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: inherit;
+
+    background-color: lighten($grey, 20);
+}
