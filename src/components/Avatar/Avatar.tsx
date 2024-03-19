@@ -1,10 +1,11 @@
+import { FC } from 'react';
 import './Avatar.scss';
-import avatar from '../../images/avatar.jpg';
+import { IAvatar } from '../../types/IFirebase';
 
-const Avatar = () => {
+const Avatar: FC<IAvatar> = ({ imageUrl, socialUrl }) => {
     return (
-        <a target='_blank' href='https://vk.com/surpri6e'>
-            <img src={avatar} alt='Avatar' className='avatar' />
+        <a target='_blank' href={socialUrl}>
+            <img src={imageUrl} alt='Avatar' className='avatar' />
         </a>
     );
 };

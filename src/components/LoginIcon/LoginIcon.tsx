@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import './IsMe.scss';
+import './LoginIcon.scss';
 
 const IsMe = () => {
     return (
-        <Link to={'/me'} className='isme'>
-            Me
+        <Link to={'/login'} className='login-icon'>
+            Я
         </Link>
     );
 };

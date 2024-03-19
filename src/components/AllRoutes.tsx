@@ -1,9 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import { privateRoutes, publicRoutes } from '../routes';
 import MainPage from '../pages/MainPage/MainPage';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../main';
 
 const AllRoutes = () => {
-    const user = false; // HERE
+    //const user = false; // HERE
+
+    const [user] = useAuthState(auth);
 
     return (
         <Routes>

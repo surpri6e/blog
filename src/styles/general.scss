@@ -1,0 +1,15 @@
+@import './vars.scss';
+
+.blocks {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    width: $container;
+
+    & > *:not(:last-child) {
+        margin-bottom: 25px;
+    }
+}
+
+// Do here breakpoints

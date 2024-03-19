@@ -1,0 +1,46 @@
+@import '../../styles/vars.scss';
+
+.login {
+    height: 100vh;
+}
+
+.login_body {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login_form {
+    display: flex;
+    flex-direction: column;
+
+    & > *:not(:last-child) {
+        margin-bottom: 10px;
+    }
+
+    &_title {
+        font-size: 28px;
+        font-weight: 800;
+    }
+
+    &_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background-color: darken($white, 20);
+
+        border-radius: 5px;
+        padding: 10px;
+
+        font-size: 16px;
+
+        transition: all 150ms linear;
+
+        &:hover {
+            background-color: darken($white, 30);
+        }
+    }
+}

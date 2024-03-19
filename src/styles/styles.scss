@@ -1,5 +1,6 @@
 @import './nulls.scss';
 @import './vars.scss';
+@import './general.scss';
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
@@ -48,13 +49,7 @@ body {
 #root {
     min-height: 100%;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
 
     font-weight: 400;
     line-height: 1;
-}
-
-.content {
-    flex: 1 0 auto;
 }

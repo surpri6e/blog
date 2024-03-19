@@ -1,9 +1,4 @@
-import { IConfigFirebase, IConfigMe } from './types/IConfigs';
-
-export const configMe: IConfigMe = {
-    login: import.meta.env.VITE_APP_LOGIN,
-    password: import.meta.env.VITE_APP_PASSWORD,
-};
+import { IConfigFirebase } from './types/IConfig';
 
 export const configFirebase: IConfigFirebase = {
     apiKey: import.meta.env.VITE_APP_apiKey,
@@ -12,5 +7,4 @@ export const configFirebase: IConfigFirebase = {
     messagingSenderId: import.meta.env.VITE_APP_messagingSenderId,
     projectId: import.meta.env.VITE_APP_projectId,
     storageBucket: import.meta.env.VITE_APP_storageBucket,
-    measurementId: import.meta.env.VITE_APP_measurementId,
 };

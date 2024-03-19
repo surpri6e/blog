@@ -1,25 +1,21 @@
 @import '../../styles/vars.scss';
 
 .block {
-    width: 600px;
-
-    & > *:not(:last-child) {
-        margin-bottom: 5px;
-    }
+    width: 95%;
 }
 
 .block_header {
     display: flex;
     align-items: center;
 
-    & > *:not(:last-child) {
-        margin-right: 10px;
-    }
+    margin-bottom: 10px;
 }
 
 .block_date {
     font-size: 14px;
     color: $grey;
+
+    margin-left: 10px;
 }
 
 .block_title {
@@ -28,5 +24,5 @@
 }
 
 .block_message {
-    font-size: 16px;
+    font-size: 14px;
 }

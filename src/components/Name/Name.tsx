@@ -1,7 +1,9 @@
+import { FC } from 'react';
 import './Name.scss';
+import { IName } from '../../types/IFirebase';
 
-const Name = () => {
-    return <div className='name'>Blog of surpri6e!</div>;
+const Name: FC<IName> = ({ name }) => {
+    return <div className='name'>{name} ведет свой блог!</div>;
 };
 
 export default Name;
