@@ -4,7 +4,6 @@ export interface IAbout {
 
 export interface IAvatar {
     imageUrl: string;
-    socialUrl: string;
 }
 
 export interface IBlock {
@@ -15,4 +14,8 @@ export interface IBlock {
 
 export interface IName {
     name: string;
+}
+
+export interface IFirebase extends IAbout, IAvatar, IName {
+    blocks: IBlock[];
 }
