@@ -6,17 +6,9 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
     const [login, , loading, error] = useSignInWithGoogle(auth);
-    const [user, loadingUser, errorUser] = useAuthState(auth);
+    const [, loadingUser, errorUser] = useAuthState(auth);
 
     const navigate = useNavigate();
-
-    if (error) {
-        throw new Error(error.message);
-    }
-
-    if (errorUser) {
-        throw new Error(errorUser.message);
-    }
 
     return (
         <div className='login'>
@@ -25,17 +17,16 @@ const LoginPage = () => {
                     <div className='login_form'>
                         {loading || loadingUser ? (
                             <Loader />
+                        ) : error || errorUser ? (
+                            <div className='other-text'>Something went wrong.</div>
                         ) : (
                             <>
                                 <div className='login_form_title'>Способы входа:</div>
                                 <button
                                     className='login_form_button'
-                                    onClick={() => {
-                                        login();
-                                        if (!loading && user) {
-                                            navigate('/');
-                                            console.log(user); // HERE
-                                        }
+                                    onClick={async () => {
+                                        await login();
+                                        navigate('/a/surpri6e');
                                     }}
                                 >
                                     Продолжить с Гугл

@@ -6,7 +6,7 @@
 
 .block_header {
     display: flex;
-    align-items: center;
+    flex-direction: column;
 
     margin-bottom: 10px;
 }
@@ -14,8 +14,6 @@
 .block_date {
     font-size: 14px;
     color: $grey;
-
-    margin-left: 10px;
 }
 
 .block_title {

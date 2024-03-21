@@ -5,11 +5,12 @@
     align-items: center;
     flex-direction: column;
 
-    width: $container;
-
     & > *:not(:last-child) {
         margin-bottom: 25px;
     }
 }
 
-// Do here breakpoints
+.other-text {
+    font-size: 16px;
+    font-weight: 700;
+}
