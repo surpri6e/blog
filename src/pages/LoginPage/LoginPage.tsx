@@ -23,7 +23,7 @@ const LoginPage = () => {
                             <>
                                 <div className='login_form_title'>Способы входа:</div>
                                 <button
-                                    className='button-big'
+                                    className='buttons'
                                     onClick={async () => {
                                         await login();
                                         navigate('/a/surpri6e');

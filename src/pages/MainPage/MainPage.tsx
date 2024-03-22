@@ -34,10 +34,10 @@ const MainPage = () => {
                     <Header />
                     {loading || loadingUser ? (
                         <Loader />
-                    ) : error || errorUser ? ( // разделить отдельно огибки и value===undefined
+                    ) : error || errorUser ? (
                         <div className='other-text'>Что-то пошло не так.</div>
                     ) : value === undefined && isYourProfile ? (
-                        <button className='button-big' onClick={async () => await createNewUser(user!)}>
+                        <button className='buttons' onClick={async () => await createNewUser(user!)}>
                             {/*just isYourProfile check on undefined user*/}
                             Создать свой профиль
                         </button>

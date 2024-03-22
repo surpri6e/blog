@@ -1,0 +1,42 @@
+.settings {
+    height: 100vh;
+}
+
+.settings_body {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings_forms {
+    & > *:not(:last-child) {
+        margin-bottom: 25px;
+    }
+}
+.settings_block {
+    & > *:not(:last-child) {
+        margin-bottom: 10px;
+    }
+}
+
+.settings_buttons {
+    display: flex;
+
+    & > *:not(:last-child) {
+        margin-right: 10px;
+    }
+}
+
+.settings_text {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.settings_social-url {
+    font-size: 16px;
+}
+
+.settings_about {
+}

@@ -14,3 +14,7 @@ export const createNewUser = async (user: User) => {
     };
     await setDoc(doc(database, 'users', user.displayName ? user.displayName : user.uid), newUser);
 };
+
+export const setUserUpdate = async (data: IFirebase) => {
+    await setDoc(doc(database, 'users', data.name), data);
+};

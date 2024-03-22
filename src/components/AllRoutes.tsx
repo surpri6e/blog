@@ -5,16 +5,14 @@ import { auth } from '../main';
 import NothingPage from '../pages/NothingPage/NothingPage';
 
 const AllRoutes = () => {
-    //const user = false; // HERE
-
-    const [user] = useAuthState(auth);
+    const [user, loading] = useAuthState(auth);
 
     return (
         <Routes>
-            {!user
+            {loading || !user
                 ? publicRoutes.map((route) => <Route element={<route.page />} path={route.path} key={route.path} />)
                 : privateRoutes.map((route) => <Route element={<route.page />} path={route.path} key={route.path} />)}
-            <Route element={<NothingPage />} path='*' />
+            {loading ? <Route element={<></>} path='*' /> : <Route element={<NothingPage />} path='*' />}
         </Routes>
     );
 };

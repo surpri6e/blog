@@ -7,6 +7,7 @@ interface IBlocks {
 }
 
 const Blocks: FC<IBlocks> = ({ blocks }) => {
+    // start new blocks -> reverse array
     return (
         <div className='blocks'>
             {blocks.length != 0 ? (

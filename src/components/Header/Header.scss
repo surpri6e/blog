@@ -1,3 +1,21 @@
+@import '../../styles/vars.scss';
+
 .header {
     width: 100%;
+
+    padding: 25px 0;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid $black;
+}
+
+.header_right {
+    display: flex;
+
+    & > *:not(:last-child) {
+        margin-right: 10px;
+    }
 }
