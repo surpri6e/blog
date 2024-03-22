@@ -1,0 +1,23 @@
+.blocks_form {
+    & > *:not(:last-child) {
+        margin-bottom: 20px;
+    }
+}
+
+.blocks_item {
+    & > *:not(:last-child) {
+        margin-bottom: 5px;
+    }
+}
+
+.blocks_message {
+    height: 300px;
+    resize: none;
+}
+
+.blocks_buttons {
+    display: flex;
+    & > *:not(:last-child) {
+        margin-right: 10px;
+    }
+}

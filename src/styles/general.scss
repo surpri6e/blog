@@ -16,6 +16,10 @@
     font-weight: 700;
 }
 
+.other-text--center {
+    text-align: center;
+}
+
 .buttons {
     display: flex;
     align-items: center;
@@ -48,5 +52,36 @@
         &:hover {
             background-color: darken(rgb(245, 120, 120), 30);
         }
+    }
+}
+
+.create_text {
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.inputs {
+    font-size: 16px;
+    border: 1px solid $black;
+    border-radius: 5px;
+    padding: 10px;
+    width: 500px;
+}
+
+@media screen and (max-width: 550px) {
+    .inputs {
+        width: 350px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .inputs {
+        width: 280px;
+    }
+}
+
+@media screen and (max-width: 330px) {
+    .inputs {
+        width: 250px;
     }
 }

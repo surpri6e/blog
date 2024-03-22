@@ -7,7 +7,16 @@
     margin-bottom: 10px;
 }
 
-.block_date {
+.block_info {
+    display: flex;
+    align-items: center;
+
+    & > *:not(:last-child) {
+        margin-right: 5px;
+    }
+}
+
+.block_info_text {
     font-size: 14px;
     color: $grey;
 }
@@ -15,6 +24,7 @@
 .block_title {
     font-size: 28px;
     font-weight: 700;
+    margin-bottom: 5px;
 }
 
 .block_message {

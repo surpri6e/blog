@@ -48,7 +48,7 @@ const MainPage = () => {
                                 <Name name={value.name} />
                                 <About about={value.about} />
                             </div>
-                            <Blocks blocks={value.blocks} />
+                            <Blocks blocks={value.blocks} isYourProfile={isYourProfile} value={value} />
                         </>
                     ) : (
                         <div className='other-text'>Этого пользователя не существует.</div>
