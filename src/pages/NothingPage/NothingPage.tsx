@@ -5,7 +5,7 @@ const NothingPage = () => {
         <div className='nothing'>
             <div className='_Container'>
                 <div className='nothing_body'>
-                    <div className='other-text'>This page doesn't exist.</div>
+                    <div className='other-text'>Этой страницы не существует.</div>
                 </div>
             </div>
         </div>

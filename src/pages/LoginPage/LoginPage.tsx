@@ -18,12 +18,12 @@ const LoginPage = () => {
                         {loading || loadingUser ? (
                             <Loader />
                         ) : error || errorUser ? (
-                            <div className='other-text'>Something went wrong.</div>
+                            <div className='other-text'>Что-то пошло не так.</div>
                         ) : (
                             <>
                                 <div className='login_form_title'>Способы входа:</div>
                                 <button
-                                    className='login_form_button'
+                                    className='button-big'
                                     onClick={async () => {
                                         await login();
                                         navigate('/a/surpri6e');

@@ -1,11 +1,19 @@
+import { FC } from 'react';
+import { IBlock } from '../types/IFirebase';
 import Block from './Block/Block';
 
-const Blocks = () => {
+interface IBlocks {
+    blocks: IBlock[];
+}
+
+const Blocks: FC<IBlocks> = ({ blocks }) => {
     return (
         <div className='blocks'>
-            <Block title='Читать' date='12:12:12' message={'твари'} />
-            <Block title='Что тут такое?' date='12:12:12' message={'суки'} />
-            <Block title='Сделать брэйкпоинты для контэйнера' date='12:12:12' message={'суки'} />
+            {blocks.length != 0 ? (
+                blocks.map((elem, ind) => <Block title={elem.title} message={elem.message} date={elem.date} isFixed={elem.isFixed} key={ind} />)
+            ) : (
+                <div className='other-text'>Постов тут нет:{'('}</div>
+            )}
         </div>
     );
 };

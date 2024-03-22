@@ -9,7 +9,7 @@ const IsMe = () => {
     return loading || user ? (
         <></>
     ) : (
-        <Link to={'/a/login'} className='login-icon'>
+        <Link to={'/login'} className='login-icon'>
             Я
         </Link>
     );

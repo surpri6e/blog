@@ -2,8 +2,9 @@
 
 .blocks {
     display: flex;
-    align-items: center;
     flex-direction: column;
+
+    width: 100%;
 
     & > *:not(:last-child) {
         margin-bottom: 25px;
@@ -13,4 +14,23 @@
 .other-text {
     font-size: 16px;
     font-weight: 700;
+}
+
+.button-big {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: darken($white, 20);
+
+    border-radius: 5px;
+    padding: 10px;
+
+    font-size: 16px;
+
+    transition: all 150ms linear;
+
+    &:hover {
+        background-color: darken($white, 30);
+    }
 }

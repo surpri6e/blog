@@ -2,7 +2,7 @@ import { FC } from 'react';
 import './Block.scss';
 import { IBlock } from '../../types/IFirebase';
 
-const Block: FC<IBlock> = ({ title, date, message }) => {
+const Block: FC<IBlock> = ({ title, date, message, isFixed }) => {
     return (
         <div className='block'>
             <div className='block_header'>
