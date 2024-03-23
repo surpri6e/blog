@@ -35,12 +35,16 @@ const MainPage = () => {
                {loading || loadingUser ? (
                   <Loader />
                ) : error || errorUser ? (
-                  <div className='other-text'>Что-то пошло не так.</div>
+                  <div className='main_padding'>
+                     <div className='other-text'>Что-то пошло не так.</div>
+                  </div>
                ) : value === undefined && isYourProfile ? (
-                  <button className='buttons' onClick={async () => await createNewUser(user!)}>
-                     {/*just isYourProfile check on undefined user*/}
-                     Создать свой профиль
-                  </button>
+                  <div className='main_padding'>
+                     <button className='buttons' onClick={async () => await createNewUser(user!)}>
+                        {/*just isYourProfile check on undefined user*/}
+                        Создать свой профиль
+                     </button>
+                  </div>
                ) : value ? (
                   <>
                      <div className='main_info'>
@@ -51,7 +55,9 @@ const MainPage = () => {
                      <Blocks blocks={value.blocks} isYourProfile={isYourProfile} value={value} />
                   </>
                ) : (
-                  <div className='other-text'>Этого пользователя не существует.</div>
+                  <div className='main_padding'>
+                     <div className='other-text'>Этого пользователя не существует.</div>
+                  </div>
                )}
             </div>
          </div>
