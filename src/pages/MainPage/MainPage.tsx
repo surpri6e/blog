@@ -47,7 +47,7 @@ const MainPage = () => {
                   </div>
                ) : value ? (
                   <>
-                     <div className='main_info'>
+                     <div className='main_info main_padding'>
                         <Avatar imageUrl={value.imageUrl ? value.imageUrl : deafultAvatar} socialUrl={value.socialUrl} />
                         <Name name={value.name} />
                         <About about={value.about} />
