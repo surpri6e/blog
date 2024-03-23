@@ -1,3 +1,3 @@
-# My blog
+# Blog
 
-I describe it after i did all project
+Site for create blogs of other people.
