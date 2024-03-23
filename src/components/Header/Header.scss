@@ -1,39 +1,43 @@
 @import '../../styles/vars.scss';
 
 .header {
-    width: 100%;
-    z-index: 100;
+   width: 100%;
+   z-index: 100;
 
-    position: fixed;
+   position: fixed;
 }
 
 .header_body {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 25px 0;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   padding: 25px 0;
 
-    border-bottom: 1px solid $black;
+   border-bottom: 1px solid $black;
 
-    background-color: $white;
+   background-color: $white;
 
-    height: 99px;
+   height: 99px;
 }
 
 .header_left {
-    width: 30%; // adaptive!
+   width: 30%;
 }
 
 .header_right {
-    display: flex;
+   display: flex;
 
-    & > *:not(:last-child) {
-        margin-right: 10px;
-    }
+   & > *:not(:last-child) {
+      margin-right: 10px;
+   }
 }
 
-@media screen and (max-width: 550px) {
-    .header_right > .buttons {
-        display: none;
-    }
+@media screen and (max-width: $bp) {
+   .header_right > .buttons {
+      display: none;
+   }
+
+   .header_left {
+      width: 40%;
+   }
 }

@@ -1,9 +1,9 @@
 export function isLink(str: string): boolean {
-    const regex = /^(https?:\/\/)?([\da-z\\.-]+)\.([a-z\\.]{2,6})([\\/\w \\.-]*)*\/?$/;
+   const regex = /^(https?:\/\/)?([\da-z\\.-]+)\.([a-z\\.]{2,6})([\\/\w \\.-]*)*\/?$/;
 
-    if (regex.test(str)) {
-        return true;
-    }
+   if (regex.test(str)) {
+      return true;
+   }
 
-    return false;
+   return false;
 }

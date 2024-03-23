@@ -1,93 +1,95 @@
+@import '../../styles/vars.scss';
+
 .burger-checkbox {
-    position: absolute;
-    visibility: hidden;
+   position: absolute;
+   visibility: hidden;
 }
 .burger {
-    position: relative;
-    z-index: 1;
-    cursor: pointer;
-    display: none;
-    position: relative;
-    border: none;
-    background: transparent;
-    width: 40px;
-    height: 26px;
+   position: relative;
+   z-index: 1;
+   cursor: pointer;
+   display: none;
+   position: relative;
+   border: none;
+   background: transparent;
+   width: 40px;
+   height: 26px;
 }
 .burger::before,
 .burger::after {
-    content: '';
-    left: 0;
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 4px;
-    border-radius: 10px;
-    background: #000;
+   content: '';
+   left: 0;
+   position: absolute;
+   display: block;
+   width: 100%;
+   height: 4px;
+   border-radius: 10px;
+   background: #000;
 }
 .burger::before {
-    top: 0;
-    box-shadow: 0 11px 0 #000;
-    transition:
-        box-shadow 0.3s 0.15s,
-        top 0.3s 0.15s,
-        transform 0.3s;
+   top: 0;
+   box-shadow: 0 11px 0 #000;
+   transition:
+      box-shadow 0.3s 0.15s,
+      top 0.3s 0.15s,
+      transform 0.3s;
 }
 .burger::after {
-    bottom: 0;
-    transition:
-        bottom 0.3s 0.15s,
-        transform 0.3s;
+   bottom: 0;
+   transition:
+      bottom 0.3s 0.15s,
+      transform 0.3s;
 }
 .burger-checkbox:checked + .burger::before {
-    top: 11px;
-    transform: rotate(45deg);
-    box-shadow: 0 6px 0 rgba(0, 0, 0, 0);
-    transition:
-        box-shadow 0.15s,
-        top 0.3s,
-        transform 0.3s 0.15s;
+   top: 11px;
+   transform: rotate(45deg);
+   box-shadow: 0 6px 0 rgba(0, 0, 0, 0);
+   transition:
+      box-shadow 0.15s,
+      top 0.3s,
+      transform 0.3s 0.15s;
 }
 .burger-checkbox:checked + .burger::after {
-    bottom: 11px;
-    transform: rotate(-45deg);
-    transition:
-        bottom 0.3s,
-        transform 0.3s 0.15s;
+   bottom: 11px;
+   transform: rotate(-45deg);
+   transition:
+      bottom 0.3s,
+      transform 0.3s 0.15s;
 }
 .menu-list {
-    top: 0;
-    left: 0;
-    position: absolute;
-    display: grid;
-    gap: 12px;
-    padding: 42px 0;
-    margin: 0;
-    background: orange;
-    list-style-type: none;
-    transform: translateX(-100%);
-    transition: 0.3s;
-    width: 200px;
+   top: 0;
+   left: 0;
+   position: absolute;
+   display: grid;
+   gap: 12px;
+   padding: 42px 0;
+   margin: 0;
+   background: $black;
+   list-style-type: none;
+   transform: translateX(-100%);
+   transition: 0.3s;
+   width: 200px;
 }
 .menu-item {
-    display: block;
-    padding: 8px;
-    color: white;
-    font-size: 18px;
-    text-align: center;
-    text-decoration: none;
+   display: block;
+   padding: 8px;
+   color: $white;
+   font-size: 18px;
+   text-align: center;
+   text-decoration: none;
 }
 .menu-item:hover {
-    background: rgba(255, 255, 255, 0.2);
+   background: rgba(255, 255, 255, 0.2);
 }
 .burger-checkbox:checked ~ .menu-list {
-    transform: translateX(0);
+   transform: translateX(0);
 }
 
 @media screen and (max-width: 550px) {
-    .menu {
-        display: flex;
-    }
-    .burger {
-        display: block;
-    }
+   .menu {
+      display: flex;
+   }
+   .burger {
+      display: block;
+   }
 }

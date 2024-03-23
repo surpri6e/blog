@@ -1,26 +1,26 @@
 @import '../../styles/vars.scss';
 
 .login-icon {
-    position: fixed;
+   position: fixed;
 
-    right: 5%;
-    bottom: 5%;
+   right: 5%;
+   bottom: 5%;
 
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
+   height: 30px;
+   width: 30px;
+   border-radius: 50%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 
-    color: inherit;
+   color: inherit;
 
-    background-color: lighten($grey, 20);
+   background-color: lighten($grey, 20);
 
-    transition: all 150ms linear;
+   transition: all 150ms linear;
 
-    &:hover {
-        transform: scale(1.2);
-    }
+   &:hover {
+      transform: scale(1.2);
+   }
 }

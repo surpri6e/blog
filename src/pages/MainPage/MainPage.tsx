@@ -17,47 +17,47 @@ import { useEffect, useState } from 'react';
 import { createNewUser } from '../../api/FirebaseApi';
 
 const MainPage = () => {
-    const { nickname } = useParams();
-    const [value, loading, error] = useDocumentData<IFirebase>(doc(database, 'users', nickname ? nickname : ' ') as DocumentReference<IFirebase>);
-    const [user, loadingUser, errorUser] = useAuthState(auth);
+   const { nickname } = useParams();
+   const [value, loading, error] = useDocumentData<IFirebase>(doc(database, 'users', nickname ? nickname : ' ') as DocumentReference<IFirebase>);
+   const [user, loadingUser, errorUser] = useAuthState(auth);
 
-    const [isYourProfile, setIsYourProfile] = useState(false);
+   const [isYourProfile, setIsYourProfile] = useState(false);
 
-    useEffect(() => {
-        setIsYourProfile(nickname === user?.displayName ? true : nickname === user?.uid ? true : false);
-    }, [user, nickname]);
+   useEffect(() => {
+      setIsYourProfile(nickname === user?.displayName ? true : nickname === user?.uid ? true : false);
+   }, [user, nickname]);
 
-    return (
-        <div className='main'>
-            <div className='_Container'>
-                <div className='main_body'>
-                    <Header />
-                    {loading || loadingUser ? (
-                        <Loader />
-                    ) : error || errorUser ? (
-                        <div className='other-text'>Что-то пошло не так.</div>
-                    ) : value === undefined && isYourProfile ? (
-                        <button className='buttons' onClick={async () => await createNewUser(user!)}>
-                            {/*just isYourProfile check on undefined user*/}
-                            Создать свой профиль
-                        </button>
-                    ) : value ? (
-                        <>
-                            <div className='main_info'>
-                                <Avatar imageUrl={value.imageUrl ? value.imageUrl : deafultAvatar} socialUrl={value.socialUrl} />
-                                <Name name={value.name} />
-                                <About about={value.about} />
-                            </div>
-                            <Blocks blocks={value.blocks} isYourProfile={isYourProfile} value={value} />
-                        </>
-                    ) : (
-                        <div className='other-text'>Этого пользователя не существует.</div>
-                    )}
-                </div>
+   return (
+      <div className='main'>
+         <div className='_Container'>
+            <div className='main_body'>
+               <Header />
+               {loading || loadingUser ? (
+                  <Loader />
+               ) : error || errorUser ? (
+                  <div className='other-text'>Что-то пошло не так.</div>
+               ) : value === undefined && isYourProfile ? (
+                  <button className='buttons' onClick={async () => await createNewUser(user!)}>
+                     {/*just isYourProfile check on undefined user*/}
+                     Создать свой профиль
+                  </button>
+               ) : value ? (
+                  <>
+                     <div className='main_info'>
+                        <Avatar imageUrl={value.imageUrl ? value.imageUrl : deafultAvatar} socialUrl={value.socialUrl} />
+                        <Name name={value.name} />
+                        <About about={value.about} />
+                     </div>
+                     <Blocks blocks={value.blocks} isYourProfile={isYourProfile} value={value} />
+                  </>
+               ) : (
+                  <div className='other-text'>Этого пользователя не существует.</div>
+               )}
             </div>
-            <LoginIcon />
-        </div>
-    );
+         </div>
+         <LoginIcon />
+      </div>
+   );
 };
 
 export default MainPage;

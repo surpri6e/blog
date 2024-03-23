@@ -11,7 +11,7 @@ export const auth = getAuth(app);
 export const database = getFirestore(app);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <React.StrictMode>
-        <App />
-    </React.StrictMode>,
+   <React.StrictMode>
+      <App />
+   </React.StrictMode>,
 );

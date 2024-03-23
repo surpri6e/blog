@@ -3,7 +3,7 @@ import './About.scss';
 import { IAbout } from '../../types/IFirebase';
 
 const About: FC<IAbout> = ({ about }) => {
-    return <div className='about'>{about}</div>;
+   return <div className='about'>{about}</div>;
 };
 
 export default About;

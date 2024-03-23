@@ -10,62 +10,62 @@ import { fixMessages } from '../../utils/fixMessages';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 const Header = () => {
-    const { nickname } = useParams();
-    const [value, loading, error] = useDocumentData<IFirebase>(doc(database, 'users', nickname ? nickname : ' ') as DocumentReference<IFirebase>);
-    const [user, loadingUser, errorUser] = useAuthState(auth);
+   const { nickname } = useParams();
+   const [value, loading, error] = useDocumentData<IFirebase>(doc(database, 'users', nickname ? nickname : ' ') as DocumentReference<IFirebase>);
+   const [user, loadingUser, errorUser] = useAuthState(auth);
 
-    const [signOut, , errorSignOut] = useSignOut(auth);
+   const [signOut, , errorSignOut] = useSignOut(auth);
 
-    return (
-        <div className='header'>
-            <div className='_Container'>
-                <div className='header_body'>
-                    {error || errorUser || errorSignOut ? (
-                        <></>
-                    ) : (
-                        <>
-                            <div className='header_left'>
-                                {loading || loadingUser ? (
-                                    <></>
-                                ) : value && value.blocks.filter((elem) => elem.isFixed).length > 0 ? (
-                                    <FixedMessages blocks={fixMessages(value.blocks)} />
-                                ) : (
-                                    <div className='other-text'>Нет закрепленных сообщений.</div>
-                                )}
-                            </div>
-                            <div className='header_right'>
-                                <BurgerMenu />
-                                {loadingUser ? (
-                                    <></>
-                                ) : !user ? (
-                                    <Link to={'/login'} className='buttons'>
-                                        Войти
-                                    </Link>
-                                ) : (
-                                    <>
-                                        <Link to={`/a/${user?.displayName ? user.displayName : user.uid}`} className='buttons'>
-                                            Профиль
-                                        </Link>
-                                        {value ? (
-                                            <Link to={'/settings'} className='buttons'>
-                                                Настройки
-                                            </Link>
-                                        ) : (
-                                            <></>
-                                        )}
+   return (
+      <div className='header'>
+         <div className='_Container'>
+            <div className='header_body'>
+               {error || errorUser || errorSignOut ? (
+                  <></>
+               ) : (
+                  <>
+                     <div className='header_left'>
+                        {loading || loadingUser ? (
+                           <></>
+                        ) : value && value.blocks.filter((elem) => elem.isFixed).length > 0 ? (
+                           <FixedMessages blocks={fixMessages(value.blocks)} />
+                        ) : (
+                           <div className='other-text'>Нет закрепленных сообщений.</div>
+                        )}
+                     </div>
+                     <div className='header_right'>
+                        <BurgerMenu loadingUser={loadingUser} user={user} signOut={signOut} value={value} />
+                        {loadingUser ? (
+                           <></>
+                        ) : !user ? (
+                           <Link to={'/login'} className='buttons'>
+                              Войти
+                           </Link>
+                        ) : (
+                           <>
+                              <Link to={`/a/${user?.displayName ? user.displayName : user.uid}`} className='buttons'>
+                                 Профиль
+                              </Link>
+                              {value ? (
+                                 <Link to={'/settings'} className='buttons'>
+                                    Настройки
+                                 </Link>
+                              ) : (
+                                 <></>
+                              )}
 
-                                        <button onClick={() => signOut()} className='buttons'>
-                                            Выйти
-                                        </button>
-                                    </>
-                                )}
-                            </div>
-                        </>
-                    )}
-                </div>
+                              <button onClick={() => signOut()} className='buttons'>
+                                 Выйти
+                              </button>
+                           </>
+                        )}
+                     </div>
+                  </>
+               )}
             </div>
-        </div>
-    );
+         </div>
+      </div>
+   );
 };
 
 export default Header;

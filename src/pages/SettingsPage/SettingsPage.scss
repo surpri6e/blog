@@ -1,47 +1,47 @@
 @import '../../styles/vars.scss';
 
 .settings {
-    height: 100vh;
+   height: 100vh;
 }
 
 .settings_body {
-    height: 100%;
+   height: 100%;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 }
 
 .settings_forms {
-    & > *:not(:last-child) {
-        margin-bottom: 25px;
-    }
+   & > *:not(:last-child) {
+      margin-bottom: 25px;
+   }
 }
 .settings_block {
-    position: relative;
+   position: relative;
 
-    & > *:not(:last-child) {
-        margin-bottom: 10px;
-    }
+   & > *:not(:last-child) {
+      margin-bottom: 10px;
+   }
 }
 
 .settings_buttons {
-    display: flex;
+   display: flex;
 
-    & > *:not(:last-child) {
-        margin-right: 10px;
-    }
+   & > *:not(:last-child) {
+      margin-right: 10px;
+   }
 }
 
 .settings_input {
-    font-size: 16px;
-    border: 1px solid $black;
-    border-radius: 5px;
-    padding: 10px;
-    width: 500px;
+   font-size: 16px;
+   border: 1px solid $black;
+   border-radius: 5px;
+   padding: 10px;
+   width: 500px;
 }
 
 .settings_about {
-    height: 400px;
-    resize: none;
+   height: 400px;
+   resize: none;
 }

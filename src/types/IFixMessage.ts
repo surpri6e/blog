@@ -1,4 +1,4 @@
 export interface IFixMessage {
-    titleOfBlock: string;
-    indexForLink: number;
+   titleOfBlock: string;
+   indexForLink: number;
 }

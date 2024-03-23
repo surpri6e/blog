@@ -1,99 +1,99 @@
 @import './vars.scss';
 
 .blocks {
-    display: flex;
-    flex-direction: column;
+   display: flex;
+   flex-direction: column;
 
-    width: 100%;
+   width: 100%;
 
-    & > *:not(:last-child) {
-        margin-bottom: 25px;
-    }
+   & > *:not(:last-child) {
+      margin-bottom: 25px;
+   }
 }
 
 .other-text {
-    font-size: 16px;
-    font-weight: 700;
+   font-size: 16px;
+   font-weight: 700;
 }
 
 .other-text--center {
-    text-align: center;
+   text-align: center;
 }
 
 .buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+   display: flex;
+   align-items: center;
+   justify-content: center;
 
-    color: inherit;
+   color: inherit;
 
-    background-color: darken($white, 20);
+   background-color: darken($white, 20);
 
-    border-radius: 5px;
-    padding: 10px;
+   border-radius: 5px;
+   padding: 10px;
 
-    font-size: 16px;
+   font-size: 16px;
 
-    transition: all 150ms linear;
+   transition: all 150ms linear;
 
-    &:hover {
-        background-color: darken($white, 30);
-    }
+   &:hover {
+      background-color: darken($white, 30);
+   }
 
-    cursor: pointer;
+   cursor: pointer;
 
-    &--green {
-        background-color: darken(rgb(134, 240, 134), 15);
-        &:hover {
-            background-color: darken(rgb(134, 240, 134), 30);
-        }
-    }
+   &--green {
+      background-color: darken(rgb(134, 240, 134), 15);
+      &:hover {
+         background-color: darken(rgb(134, 240, 134), 30);
+      }
+   }
 
-    &--red {
-        background-color: darken(rgb(240, 163, 163), 15);
-        &:hover {
-            background-color: darken(rgb(240, 163, 163), 30);
-        }
-    }
+   &--red {
+      background-color: darken(rgb(240, 163, 163), 15);
+      &:hover {
+         background-color: darken(rgb(240, 163, 163), 30);
+      }
+   }
 
-    &--small {
-        padding: 3px;
-        font-size: 14px;
-    }
+   &--small {
+      padding: 3px;
+      font-size: 14px;
+   }
 
-    &--arrows {
-        padding: 4px;
-        font-size: 20px;
-    }
+   &--arrows {
+      padding: 4px;
+      font-size: 20px;
+   }
 }
 
 .create_text {
-    font-size: 18px;
-    font-weight: 800;
+   font-size: 18px;
+   font-weight: 800;
 }
 
 .inputs {
-    font-size: 16px;
-    border: 1px solid $black;
-    border-radius: 5px;
-    padding: 10px;
-    width: 500px;
+   font-size: 16px;
+   border: 1px solid $black;
+   border-radius: 5px;
+   padding: 10px;
+   width: 500px;
 }
 
-@media screen and (max-width: 550px) {
-    .inputs {
-        width: 350px;
-    }
+@media screen and (max-width: $bp) {
+   .inputs {
+      width: 350px;
+   }
 }
 
 @media screen and (max-width: 400px) {
-    .inputs {
-        width: 280px;
-    }
+   .inputs {
+      width: 280px;
+   }
 }
 
 @media screen and (max-width: 330px) {
-    .inputs {
-        width: 250px;
-    }
+   .inputs {
+      width: 250px;
+   }
 }
