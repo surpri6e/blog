@@ -1,6 +1,6 @@
 .main_body {
     height: 100%;
-    padding: 3.5rem 0;
+    padding: 0 0 3.5rem 0;
 
     display: flex;
     flex-direction: column;
@@ -15,6 +15,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    padding: 120px 0 0 0;
 
     width: 100%;
 

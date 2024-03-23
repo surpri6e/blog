@@ -16,49 +16,65 @@ const Header = () => {
 
     // при нажатии на закрепленное сообщение в хеадере долэно вести к этому посту
 
+    /*
+    {blocks.map((elem, ind) => {
+        if (elem.isFixed) {
+            return (
+                <a href={`/a/${name}/#anchor-${ind}`} key={ind}>
+                    mes
+                </a>
+            );
+        }
+    })} сделать тут и передавать в закрепленки уже новый массив 
+    */
+
     return (
         <div className='header'>
-            {error || errorUser || errorSignOut ? (
-                <></>
-            ) : (
-                <>
-                    <div className='header_left'>
-                        {loading || loadingUser ? (
-                            <></>
-                        ) : value && value.blocks.length > 0 ? (
-                            <FixedMessages blocks={value.blocks} />
-                        ) : (
-                            <div className='other-text'>Нет закрепленных сообщений.</div>
-                        )}
-                    </div>
-                    <div className='header_right'>
-                        {loadingUser ? (
-                            <></>
-                        ) : !user ? (
-                            <Link to={'/login'} className='buttons'>
-                                Войти
-                            </Link>
-                        ) : (
-                            <>
-                                <Link to={`/a/${user?.displayName ? user.displayName : user.uid}`} className='buttons'>
-                                    Профиль
-                                </Link>
-                                {value ? (
-                                    <Link to={'/settings'} className='buttons'>
-                                        Настройки
+            <div className='_Container'>
+                <div className='header_body'>
+                    {error || errorUser || errorSignOut ? (
+                        <></>
+                    ) : (
+                        <>
+                            <div className='header_left'>
+                                {loading || loadingUser ? (
+                                    <></>
+                                ) : value && value.blocks.length > 0 ? (
+                                    <FixedMessages blocks={value.blocks} name={value.name} />
+                                ) : (
+                                    <div className='other-text'>Нет закрепленных сообщений.</div>
+                                )}
+                            </div>
+                            <div className='header_right'>
+                                {loadingUser ? (
+                                    <></>
+                                ) : !user ? (
+                                    <Link to={'/login'} className='buttons'>
+                                        Войти
                                     </Link>
                                 ) : (
-                                    <></>
-                                )}
+                                    <>
+                                        <Link to={`/a/${user?.displayName ? user.displayName : user.uid}`} className='buttons'>
+                                            Профиль
+                                        </Link>
+                                        {value ? (
+                                            <Link to={'/settings'} className='buttons'>
+                                                Настройки
+                                            </Link>
+                                        ) : (
+                                            <></>
+                                        )}
 
-                                <button onClick={() => signOut()} className='buttons'>
-                                    Выйти
-                                </button>
-                            </>
-                        )}
-                    </div>
-                </>
-            )}
+                                        <button onClick={() => signOut()} className='buttons'>
+                                            Выйти
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+                        </>
+                    )}
+                </div>
+            </div>
         </div>
     );
 };

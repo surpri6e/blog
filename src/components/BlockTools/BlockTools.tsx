@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import './BlockTools.scss';
 import { IFirebase } from '../../types/IFirebase';
 import { setUserUpdate } from '../../api/FirebaseApi';
@@ -9,7 +9,9 @@ interface IBlockTools {
 }
 
 const BlockTools: FC<IBlockTools> = ({ value, ind }) => {
-    return (
+    const [isRedactoring, setIsRedactoring] = useState<boolean>(false);
+
+    return !isRedactoring ? (
         <div className='block-tools'>
             <div
                 className='buttons buttons--small'
@@ -20,7 +22,9 @@ const BlockTools: FC<IBlockTools> = ({ value, ind }) => {
             >
                 {value.blocks[ind].isFixed ? 'Отк.' : 'Зак.'}
             </div>
-            <div className='buttons buttons--small'>Ред.</div>
+            <div className='buttons buttons--small' onClick={() => setIsRedactoring(true)}>
+                Ред.
+            </div>
             <div
                 className='buttons buttons--small'
                 onDoubleClick={async () => {
@@ -29,6 +33,13 @@ const BlockTools: FC<IBlockTools> = ({ value, ind }) => {
                 }}
             >
                 Уда.
+            </div>
+        </div>
+    ) : (
+        <div className='block-tools'>
+            <div className='buttons buttons--small'>При.</div>
+            <div className='buttons buttons--small' onClick={() => setIsRedactoring(false)}>
+                Отк.
             </div>
         </div>
     );

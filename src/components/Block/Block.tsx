@@ -11,7 +11,7 @@ interface IBlockTools {
 
 const Block: FC<IBlock & IBlockTools> = ({ title, date, message, isFixed, value, isYourProfile, ind }) => {
     return (
-        <div className='block' id={`${isFixed ? `anchor-${title}` : ''}`}>
+        <div className='block' id={`${isFixed ? `anchor-${ind}` : ''}`}>
             {isYourProfile ? <BlockTools ind={ind} value={value} /> : <></>}
             <div className='block_header'>
                 <a className='block_title'>{title}</a>
