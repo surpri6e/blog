@@ -40,18 +40,25 @@
         background-color: darken($white, 30);
     }
 
+    cursor: pointer;
+
     &--green {
-        background-color: darken(rgb(90, 248, 90), 20);
+        background-color: darken(rgb(134, 240, 134), 15);
         &:hover {
-            background-color: darken(rgb(90, 248, 90), 30);
+            background-color: darken(rgb(134, 240, 134), 30);
         }
     }
 
     &--red {
-        background-color: darken(rgb(245, 120, 120), 20);
+        background-color: darken(rgb(240, 163, 163), 15);
         &:hover {
-            background-color: darken(rgb(245, 120, 120), 30);
+            background-color: darken(rgb(240, 163, 163), 30);
         }
+    }
+
+    &--small {
+        padding: 3px;
+        font-size: 14px;
     }
 }
 

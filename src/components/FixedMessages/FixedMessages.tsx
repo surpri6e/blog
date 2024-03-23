@@ -7,7 +7,19 @@ interface IFixedMessages {
 }
 
 const FixedMessages: FC<IFixedMessages> = ({ blocks }) => {
-    return <>{blocks.map((elem) => (elem.isFixed ? <a href={`#${elem.title}`}>mes</a> : <></>))}</>;
+    return (
+        <>
+            {blocks.map((elem, ind) =>
+                elem.isFixed ? (
+                    <a href={`#${elem.title}`} key={ind}>
+                        mes
+                    </a>
+                ) : (
+                    <></>
+                ),
+            )}
+        </>
+    );
 };
 
 export default FixedMessages;

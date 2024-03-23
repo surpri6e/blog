@@ -1,10 +1,18 @@
 import { FC } from 'react';
 import './Block.scss';
-import { IBlock } from '../../types/IFirebase';
+import { IBlock, IFirebase } from '../../types/IFirebase';
+import BlockTools from '../BlockTools/BlockTools';
 
-const Block: FC<IBlock> = ({ title, date, message, isFixed }) => {
+interface IBlockTools {
+    value: IFirebase;
+    isYourProfile: boolean;
+    ind: number;
+}
+
+const Block: FC<IBlock & IBlockTools> = ({ title, date, message, isFixed, value, isYourProfile, ind }) => {
     return (
         <div className='block' id={`${isFixed ? `anchor-${title}` : ''}`}>
+            {isYourProfile ? <BlockTools ind={ind} value={value} /> : <></>}
             <div className='block_header'>
                 <a className='block_title'>{title}</a>
                 <div className='block_info'>
@@ -12,7 +20,10 @@ const Block: FC<IBlock> = ({ title, date, message, isFixed }) => {
                     {isFixed ? <div className='block_info_text'>Закрепленное сообщение.</div> : <></>}
                 </div>
             </div>
-            <div className='block_message'>{message}</div>
+            <div className='block_message'>
+                <b>({title}) </b>
+                {message}
+            </div>
         </div>
     );
 };
