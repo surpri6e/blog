@@ -16,6 +16,12 @@
     border-bottom: 1px solid $black;
 
     background-color: $white;
+
+    height: 99px;
+}
+
+.header_left {
+    width: 30%; // adaptive!
 }
 
 .header_right {
@@ -23,5 +29,11 @@
 
     & > *:not(:last-child) {
         margin-right: 10px;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .header_right > .buttons {
+        display: none;
     }
 }

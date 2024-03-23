@@ -6,6 +6,8 @@ import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { IFirebase } from '../../types/IFirebase';
 import { DocumentReference, doc } from 'firebase/firestore';
 import FixedMessages from '../FixedMessages/FixedMessages';
+import { fixMessages } from '../../utils/fixMessages';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 const Header = () => {
     const { nickname } = useParams();
@@ -13,20 +15,6 @@ const Header = () => {
     const [user, loadingUser, errorUser] = useAuthState(auth);
 
     const [signOut, , errorSignOut] = useSignOut(auth);
-
-    // при нажатии на закрепленное сообщение в хеадере долэно вести к этому посту
-
-    /*
-    {blocks.map((elem, ind) => {
-        if (elem.isFixed) {
-            return (
-                <a href={`/a/${name}/#anchor-${ind}`} key={ind}>
-                    mes
-                </a>
-            );
-        }
-    })} сделать тут и передавать в закрепленки уже новый массив 
-    */
 
     return (
         <div className='header'>
@@ -39,13 +27,14 @@ const Header = () => {
                             <div className='header_left'>
                                 {loading || loadingUser ? (
                                     <></>
-                                ) : value && value.blocks.length > 0 ? (
-                                    <FixedMessages blocks={value.blocks} name={value.name} />
+                                ) : value && value.blocks.filter((elem) => elem.isFixed).length > 0 ? (
+                                    <FixedMessages blocks={fixMessages(value.blocks)} />
                                 ) : (
                                     <div className='other-text'>Нет закрепленных сообщений.</div>
                                 )}
                             </div>
                             <div className='header_right'>
+                                <BurgerMenu />
                                 {loadingUser ? (
                                     <></>
                                 ) : !user ? (

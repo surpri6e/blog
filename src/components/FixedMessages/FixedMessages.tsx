@@ -1,27 +1,36 @@
-import { FC } from 'react';
-import { IBlock } from '../../types/IFirebase';
+import { FC, useState } from 'react';
 import './FixedMessages.scss';
-import { Link } from 'react-router-dom';
+import { IFixMessage } from '../../types/IFixMessage';
 
 interface IFixedMessages {
-    blocks: IBlock[];
-    name: string;
+    blocks: IFixMessage[];
 }
 
-const FixedMessages: FC<IFixedMessages> = ({ blocks, name }) => {
+const FixedMessages: FC<IFixedMessages> = ({ blocks }) => {
+    const [blockIndex, setBlockIndex] = useState(0);
+
     return (
-        <>
-            {blocks.map((elem, ind) => {
-                if (elem.isFixed) {
-                    return (
-                        // /a/${name}/
-                        <a href={`#anchor-${ind}`} key={ind}>
-                            mes
-                        </a>
-                    );
-                }
-            })}
-        </>
+        <div className='fixed-messages'>
+            <div className='fixed-messages_text'>
+                <a href={`#anchor-${blocks[blockIndex].indexForLink}`}>{blocks[blockIndex].titleOfBlock}</a>
+            </div>
+            <div className='fixed-messages_buttons'>
+                {blockIndex === 0 ? (
+                    <></>
+                ) : (
+                    <button className='buttons buttons--arrows fixed-messages_button--up' onClick={() => setBlockIndex(blockIndex - 1)}>
+                        {'<'}
+                    </button>
+                )}
+                {blockIndex === blocks.length - 1 ? (
+                    <></>
+                ) : (
+                    <button className='buttons buttons--arrows fixed-messages_button--down' onClick={() => setBlockIndex(blockIndex + 1)}>
+                        {'<'}
+                    </button>
+                )}
+            </div>
+        </div>
     );
 };
 

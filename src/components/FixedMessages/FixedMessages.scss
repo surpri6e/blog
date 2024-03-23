@@ -1,0 +1,34 @@
+.fixed-messages {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    & > *:not(:last-child) {
+        margin-right: 15px;
+    }
+}
+
+.fixed-messages_text {
+    width: 80%;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    a {
+        font-size: 16px;
+        font-weight: 800;
+
+        color: inherit;
+    }
+}
+
+.fixed-messages_button {
+    &--up {
+        transform: rotate(90deg);
+    }
+
+    &--down {
+        transform: rotate(270deg);
+    }
+}
