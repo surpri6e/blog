@@ -37,6 +37,7 @@ const SettingsPage = () => {
                   {loadingUser || loading ? (
                      <Loader />
                   ) : error || errorUser ? (
+                     // Handle error
                      <div className='other-text'>Что-то пошло не так.</div>
                   ) : user && value ? (
                      <>
@@ -51,16 +52,20 @@ const SettingsPage = () => {
                               placeholder='https://www.com'
                            />
                         </div>
+
                         <div className='settings_block'>
                            <div className='create_text'>О себе:</div>
                            <textarea value={about} className='inputs settings_about' onChange={(e) => setAbout(e.target.value)} placeholder='Напиши о себе' />
                         </div>
+
                         <div className='settings_buttons'>
                            <Link to={`/a/${user?.displayName ? user.displayName : user.uid}`} className='buttons buttons--red'>
                               Отклонить
                            </Link>
+
                            <button
                               className='buttons buttons--green'
+                              // Update user's information
                               onClick={async () => {
                                  if (isLink(socialUrl)) {
                                     await setUserUpdate({ ...value, socialUrl, about });

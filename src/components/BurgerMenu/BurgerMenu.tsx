@@ -20,12 +20,14 @@ const BurgerMenu: FC<IBurgerMenu> = ({ loadingUser, user, signOut, value }) => {
             {loadingUser ? (
                <></>
             ) : !user ? (
+               // If user not logging
                <li>
                   <Link to={'/login'} className='menu-item'>
                      Войти
                   </Link>
                </li>
             ) : (
+               // If user logging
                <>
                   <li>
                      <Link to={`/a/${user?.displayName ? user.displayName : user.uid}`} className='menu-item'>
@@ -33,6 +35,7 @@ const BurgerMenu: FC<IBurgerMenu> = ({ loadingUser, user, signOut, value }) => {
                      </Link>
                   </li>
 
+                  {/* If user has profile */}
                   {value ? (
                      <li>
                         <Link to={'/settings'} className='menu-item'>

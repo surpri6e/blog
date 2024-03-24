@@ -15,6 +15,7 @@ const BlockTools: FC<IBlockTools> = ({ value, ind }) => {
       <div className='block-tools'>
          <div
             className='buttons buttons--small'
+            // Delete block from list
             onClick={async () => {
                value.blocks.splice(ind, 1);
                await setUserUpdate({ ...value });
@@ -31,6 +32,7 @@ const BlockTools: FC<IBlockTools> = ({ value, ind }) => {
       <div className='block-tools'>
          <div
             className='buttons buttons--small'
+            // Do block fixed or unfixed
             onClick={async () => {
                value.blocks[ind] = { ...value.blocks[ind], isFixed: !value.blocks[ind].isFixed };
                await setUserUpdate({ ...value });

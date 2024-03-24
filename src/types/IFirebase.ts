@@ -1,3 +1,5 @@
+// API for working with database
+
 export interface IAbout {
    about: string;
 }

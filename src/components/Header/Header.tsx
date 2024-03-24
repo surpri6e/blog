@@ -20,11 +20,13 @@ const Header = () => {
       <div className='header'>
          <div className='_Container'>
             <div className='header_body'>
+               {/* Handle error */}
                {error || errorUser || errorSignOut ? (
                   <></>
                ) : (
                   <>
                      <div className='header_left'>
+                        {/* If user has fixed message shows it */}
                         {loading || loadingUser ? (
                            <></>
                         ) : value && value.blocks.filter((elem) => elem.isFixed).length > 0 ? (
@@ -33,19 +35,25 @@ const Header = () => {
                            <div className='other-text'>Нет закрепленных сообщений.</div>
                         )}
                      </div>
+
                      <div className='header_right'>
                         <BurgerMenu loadingUser={loadingUser} user={user} signOut={signOut} value={value} />
+
                         {loadingUser ? (
                            <></>
                         ) : !user ? (
+                           // If user not logging
                            <Link to={'/login'} className='buttons'>
                               Войти
                            </Link>
                         ) : (
+                           // If user logging
                            <>
                               <Link to={`/a/${user?.displayName ? user.displayName : user.uid}`} className='buttons'>
                                  Профиль
                               </Link>
+
+                              {/* If user has profile */}
                               {value ? (
                                  <Link to={'/settings'} className='buttons'>
                                     Настройки

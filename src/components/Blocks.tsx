@@ -24,6 +24,7 @@ const Blocks: FC<IBlocks> = ({ blocks, isYourProfile, value }) => {
    return (
       <>
          <div className='blocks'>
+            {/* Shows blocks */}
             {blocks.length != 0 ? (
                blocks.map((elem, ind) => (
                   <Block
@@ -41,6 +42,8 @@ const Blocks: FC<IBlocks> = ({ blocks, isYourProfile, value }) => {
                <div className='other-text other-text--center'>Постов тут нет:{'('}</div>
             )}
          </div>
+
+         {/* Logic of create new block */}
          {!isPressed && isYourProfile ? (
             <button className='buttons' onClick={() => setIsPressed(true)}>
                Создать новый пост
@@ -62,6 +65,7 @@ const Blocks: FC<IBlocks> = ({ blocks, isYourProfile, value }) => {
                   </button>
                   <button
                      className='buttons buttons--green'
+                     // Create new block from title and message state
                      onClick={async () => {
                         if (title.length > 3) {
                            await setUserUpdate({

@@ -1,3 +1,4 @@
+/** Do string with data of creating block */
 export function dateFormatter(date: Date): string {
    const dateString = date.toString().slice(4, 15);
    let month = dateString.slice(0, 3);

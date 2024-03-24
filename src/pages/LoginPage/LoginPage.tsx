@@ -23,6 +23,7 @@ const LoginPage = () => {
                      <>
                         <div className='login_form_title'>Способы входа:</div>
                         <button
+                           // Logging with Google API
                            className='buttons'
                            onClick={async () => {
                               await login();

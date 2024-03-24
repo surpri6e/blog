@@ -10,6 +10,7 @@ const FixedMessages: FC<IFixedMessages> = ({ blocks }) => {
    const [blockIndex, setBlockIndex] = useState(0);
    const [blocksMain, setBlocksMain] = useState(blocks);
 
+   // Update fixed messages when deleting or creating block
    useEffect(() => {
       setBlockIndex(0);
       setBlocksMain(blocks);

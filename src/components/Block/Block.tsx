@@ -13,6 +13,7 @@ const Block: FC<IBlock & IBlockTools> = ({ title, date, message, isFixed, value,
    return (
       <div className='block' id={`${isFixed ? `anchor-${ind}` : ''}`}>
          {isYourProfile ? <BlockTools ind={ind} value={value} /> : <></>}
+
          <div className='block_header'>
             <a className='block_title'>{title}</a>
             <div className='block_info'>
@@ -20,6 +21,7 @@ const Block: FC<IBlock & IBlockTools> = ({ title, date, message, isFixed, value,
                {isFixed ? <div className='block_info_text'>Закрепленное сообщение.</div> : <></>}
             </div>
          </div>
+
          <div className='block_message'>
             <b>({title}) </b>
             {message}

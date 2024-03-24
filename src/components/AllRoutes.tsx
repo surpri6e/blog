@@ -7,6 +7,8 @@ import NothingPage from '../pages/NothingPage/NothingPage';
 const AllRoutes = () => {
    const [user, loading] = useAuthState(auth);
 
+   // If user logging shows private routes
+   // If user not logging shows public  routes
    return (
       <Routes>
          {loading || !user
