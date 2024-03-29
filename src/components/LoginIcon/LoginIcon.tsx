@@ -3,7 +3,7 @@ import './LoginIcon.scss';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../main';
 
-const IsMe = () => {
+const LoginIcon = () => {
    const [user, loading] = useAuthState(auth);
 
    return loading || user ? (
@@ -15,4 +15,4 @@ const IsMe = () => {
    );
 };
 
-export default IsMe;
+export default LoginIcon;
