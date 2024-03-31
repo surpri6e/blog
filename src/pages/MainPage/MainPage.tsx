@@ -18,6 +18,7 @@ import { createNewUser } from '../../api/FirebaseApi';
 
 const MainPage = () => {
    const { nickname } = useParams();
+
    const [value, loading, error] = useDocumentData<IFirebase>(doc(database, 'users', nickname ? nickname : ' ') as DocumentReference<IFirebase>);
    const [user, loadingUser, errorUser] = useAuthState(auth);
 
@@ -25,7 +26,7 @@ const MainPage = () => {
 
    // Check on your account
    useEffect(() => {
-      setIsYourProfile(nickname === user?.displayName ? true : nickname === user?.uid ? true : false);
+      setIsYourProfile(nickname === user?.uid);
    }, [user, nickname]);
 
    return (
@@ -33,38 +34,36 @@ const MainPage = () => {
          <div className='_Container'>
             <div className='main_body'>
                <Header />
-               {loading || loadingUser ? (
-                  <Loader />
-               ) : error || errorUser ? (
-                  // Handle error
-                  <div className='main_padding'>
-                     <div className='other-text'>Что-то пошло не так.</div>
-                  </div>
-               ) : value === undefined && isYourProfile ? (
-                  // If you are logginng, but have no profile
-                  <div className='main_padding'>
+
+               <div className='main_padding'>
+                  {(loading || loadingUser) && <Loader />}
+                  {(error || errorUser) && !(loading || loadingUser) && <div className='other-text'>Что-то пошло не так.</div>}
+
+                  {!value && isYourProfile && !(loading || loadingUser) && (
+                     // If you are logginng, but have no profile
                      <button className='buttons' onClick={async () => await createNewUser(user!)}>
                         {/*just isYourProfile check on undefined user*/}
                         Создать свой профиль
                      </button>
-                  </div>
-               ) : value ? (
-                  // If you are logginng, but have profile
-                  <>
-                     <div className='main_info main_padding'>
-                        <Avatar imageUrl={value.imageUrl ? value.imageUrl : deafultAvatar} socialUrl={value.socialUrl} />
-                        <Name name={value.name} />
-                        <About about={value.about} />
-                     </div>
-                     <Blocks blocks={value.blocks} isYourProfile={isYourProfile} value={value} />
-                  </>
-               ) : (
-                  <div className='main_padding'>
-                     <div className='other-text'>Этого пользователя не существует.</div>
-                  </div>
-               )}
+                  )}
+
+                  {!value && !isYourProfile && !(loading || loadingUser) && <div className='other-text'>Этого пользователя не существует.</div>}
+
+                  {value && !(loading || loadingUser) && (
+                     // If you are logginng, but have profile
+                     <>
+                        <div className='main_info'>
+                           <Avatar imageUrl={value.imageUrl ? value.imageUrl : deafultAvatar} socialUrl={value.socialUrl} />
+                           <Name name={value.name} />
+                           <About about={value.about} />
+                        </div>
+                        <Blocks blocks={value.blocks} isYourProfile={isYourProfile} value={value} />
+                     </>
+                  )}
+               </div>
             </div>
          </div>
+
          <LoginIcon />
       </div>
    );

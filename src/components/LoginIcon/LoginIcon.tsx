@@ -6,12 +6,12 @@ import { auth } from '../../main';
 const LoginIcon = () => {
    const [user, loading] = useAuthState(auth);
 
-   return loading || user ? (
-      <></>
-   ) : (
-      <Link to={'/login'} className='login-icon'>
-         Я
-      </Link>
+   return (
+      !(loading || user) && (
+         <Link to={'/login'} className='login-icon'>
+            Я
+         </Link>
+      )
    );
 };
 

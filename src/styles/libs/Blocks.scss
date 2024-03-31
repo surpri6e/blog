@@ -1,3 +1,14 @@
+.blocks {
+   display: flex;
+   flex-direction: column;
+
+   width: 100%;
+
+   & > *:not(:last-child) {
+      margin-bottom: 25px;
+   }
+}
+
 .blocks_form {
    & > *:not(:last-child) {
       margin-bottom: 20px;

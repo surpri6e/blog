@@ -32,10 +32,11 @@ const Blocks: FC<IBlocks> = ({ blocks, isYourProfile, value }) => {
                      message={elem.message}
                      date={elem.date}
                      isFixed={elem.isFixed}
-                     key={ind}
+                     isPrivate={elem.isPrivate}
                      isYourProfile={isYourProfile}
                      value={value}
                      ind={ind}
+                     key={ind}
                   />
                ))
             ) : (
@@ -44,25 +45,31 @@ const Blocks: FC<IBlocks> = ({ blocks, isYourProfile, value }) => {
          </div>
 
          {/* Logic of create new block */}
-         {!isPressed && isYourProfile ? (
+         {!isPressed && isYourProfile && (
             <button className='buttons' onClick={() => setIsPressed(true)}>
                Создать новый пост
             </button>
-         ) : isPressed && isYourProfile ? (
+         )}
+
+         {isPressed && isYourProfile && (
             <div className='blocks_form'>
                <div className='blocks_item'>
                   <div className='create_text'>Название поста:</div>
-                  {isLinkError ? <HelpWindow title='Нужно больше 3 символов' /> : <></>}
+                  {isLinkError && <HelpWindow title='Нужно больше 3 символов' />}
+
                   <input type='text' className='inputs' placeholder='О чем пост...' value={title} onChange={(e) => setTitle(e.target.value)} />
                </div>
+
                <div className='blocks_item'>
                   <div className='create_text'>Содержимое:</div>
                   <textarea className='inputs blocks_message' placeholder='Распиши подробнее...' value={message} onChange={(e) => setMessage(e.target.value)} />
                </div>
+
                <div className='blocks_buttons'>
                   <button className='buttons buttons--red' onClick={() => setIsPressed(false)}>
                      Выйти
                   </button>
+
                   <button
                      className='buttons buttons--green'
                      // Create new block from title and message state
@@ -70,7 +77,10 @@ const Blocks: FC<IBlocks> = ({ blocks, isYourProfile, value }) => {
                         if (title.length > 3) {
                            await setUserUpdate({
                               ...value,
-                              blocks: [...blocks, { title, message, date: dateFormatter(new Date(Timestamp.now().seconds * 1000)), isFixed: false }],
+                              blocks: [
+                                 ...blocks,
+                                 { title, message, date: dateFormatter(new Date(Timestamp.now().seconds * 1000)), isFixed: false, isPrivate: false },
+                              ],
                            });
                            setIsPressed(false);
                            setTitle('');
@@ -87,8 +97,6 @@ const Blocks: FC<IBlocks> = ({ blocks, isYourProfile, value }) => {
                   </button>
                </div>
             </div>
-         ) : (
-            <></>
          )}
       </>
    );

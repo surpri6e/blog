@@ -2,17 +2,6 @@
 
 // Main styles
 
-.blocks {
-   display: flex;
-   flex-direction: column;
-
-   width: 100%;
-
-   & > *:not(:last-child) {
-      margin-bottom: 25px;
-   }
-}
-
 .other-text {
    font-size: 16px;
    font-weight: 700;

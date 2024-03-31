@@ -13,14 +13,15 @@ import { isLink } from '../../utils/isLink';
 
 const SettingsPage = () => {
    const [user, loadingUser, errorUser] = useAuthState(auth);
-   const [value, loading, error] = useDocumentData<IFirebase>(
-      doc(database, 'users', user?.displayName ? user.displayName : user?.uid ? user.uid : ' ') as DocumentReference<IFirebase>,
-   );
+   const [value, loading, error] = useDocumentData<IFirebase>(doc(database, 'users', user?.uid ? user.uid : ' ') as DocumentReference<IFirebase>);
 
    const navigate = useNavigate();
 
    const [socialUrl, setSocialUrl] = useState('');
    const [about, setAbout] = useState('');
+   const [name, setName] = useState('');
+
+   console.log(user);
 
    const [isLinkError, setIsLinkError] = useState(false);
 
@@ -34,16 +35,16 @@ const SettingsPage = () => {
          <div className='_Container'>
             <div className='settings_body'>
                <div className='settings_forms'>
-                  {loadingUser || loading ? (
-                     <Loader />
-                  ) : error || errorUser ? (
-                     // Handle error
-                     <div className='other-text'>Что-то пошло не так.</div>
-                  ) : user && value ? (
+                  {(loadingUser || loading) && <Loader />}
+
+                  {(error || errorUser) && <div className='other-text'>Что-то пошло не так.</div>}
+
+                  {user && value && (
                      <>
                         <div className='settings_block'>
                            <div className='create_text'>Социальная ссылка:</div>
-                           {isLinkError ? <HelpWindow title='Это не ссылка' /> : <></>}
+                           {isLinkError && <HelpWindow title='Это не ссылка' />}
+
                            <input
                               type='text'
                               value={socialUrl}
@@ -59,7 +60,7 @@ const SettingsPage = () => {
                         </div>
 
                         <div className='settings_buttons'>
-                           <Link to={`/a/${user?.displayName ? user.displayName : user.uid}`} className='buttons buttons--red'>
+                           <Link to={`/a/${user.uid}`} className='buttons buttons--red'>
                               Отклонить
                            </Link>
 
@@ -82,9 +83,9 @@ const SettingsPage = () => {
                            </button>
                         </div>
                      </>
-                  ) : (
-                     <div className='other-text'>Ваш профиль еще не создан.</div>
                   )}
+
+                  {!(loadingUser || loading) && !(error || errorUser) && <div className='other-text'>Ваш профиль еще не создан.</div>}
                </div>
             </div>
          </div>

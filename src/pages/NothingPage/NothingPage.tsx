@@ -7,7 +7,7 @@ const NothingPage = () => {
          <div className='_Container'>
             <div className='nothing_body'>
                <div className='other-text'>
-                  Этой страницы не существует. <Link to={'/a/surpri6e'}>Далее</Link>
+                  Этой страницы не существует. <Link to={'/a/guUkSZJoq4ZP3ebzndmXct9m4f73'}>Профиль создателя</Link>
                </div>
             </div>
          </div>
