@@ -41,6 +41,17 @@ const BlockTools: FC<IBlockTools> = ({ value, ind }) => {
             {value.blocks[ind].isFixed ? 'Отк.' : 'Зак.'}
          </div>
 
+         <div
+            className='buttons buttons--small'
+            // Do block private or not
+            onClick={async () => {
+               value.blocks[ind] = { ...value.blocks[ind], isPrivate: !value.blocks[ind].isPrivate };
+               await setUserUpdate({ ...value });
+            }}
+         >
+            {value.blocks[ind].isPrivate ? 'Пуб.' : 'При.'}
+         </div>
+
          <div className='buttons buttons--small' onClick={() => setIsWantDelete(true)}>
             Уда.
          </div>

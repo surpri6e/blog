@@ -25,7 +25,7 @@ const Blocks: FC<IBlocks> = ({ blocks, isYourProfile, value }) => {
       <>
          <div className='blocks'>
             {/* Shows blocks */}
-            {blocks.length != 0 ? (
+            {blocks.length > 0 &&
                blocks.map((elem, ind) => (
                   <Block
                      title={elem.title}
@@ -38,17 +38,21 @@ const Blocks: FC<IBlocks> = ({ blocks, isYourProfile, value }) => {
                      ind={ind}
                      key={ind}
                   />
-               ))
-            ) : (
-               <div className='other-text other-text--center'>Постов тут нет:{'('}</div>
+               ))}
+
+            {isYourProfile && blocks.length === 0 && <div className='other-text other-text--center'>Постов тут нет</div>}
+            {!isYourProfile && blocks.length === blocks.filter((elem) => elem.isPrivate).length && (
+               <div className='other-text other-text--center'>Постов тут нет</div>
             )}
          </div>
 
          {/* Logic of create new block */}
          {!isPressed && isYourProfile && (
-            <button className='buttons' onClick={() => setIsPressed(true)}>
-               Создать новый пост
-            </button>
+            <div className='blocks_form'>
+               <button className='buttons' onClick={() => setIsPressed(true)}>
+                  Создать новый пост
+               </button>
+            </div>
          )}
 
          {isPressed && isYourProfile && (
@@ -57,12 +61,17 @@ const Blocks: FC<IBlocks> = ({ blocks, isYourProfile, value }) => {
                   <div className='create_text'>Название поста:</div>
                   {isLinkError && <HelpWindow title='Нужно больше 3 символов' />}
 
-                  <input type='text' className='inputs' placeholder='О чем пост...' value={title} onChange={(e) => setTitle(e.target.value)} />
+                  <input type='text' className='inputs--width' placeholder='О чем пост...' value={title} onChange={(e) => setTitle(e.target.value)} />
                </div>
 
                <div className='blocks_item'>
                   <div className='create_text'>Содержимое:</div>
-                  <textarea className='inputs blocks_message' placeholder='Распиши подробнее...' value={message} onChange={(e) => setMessage(e.target.value)} />
+                  <textarea
+                     className='blocks_message inputs--width'
+                     placeholder='Распиши подробнее...'
+                     value={message}
+                     onChange={(e) => setMessage(e.target.value)}
+                  />
                </div>
 
                <div className='blocks_buttons'>

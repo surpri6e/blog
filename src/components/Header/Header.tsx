@@ -13,7 +13,7 @@ const Header = () => {
    const { nickname } = useParams();
 
    const [value] = useDocumentData<IFirebase>(doc(database, 'users', nickname ? nickname : ' ') as DocumentReference<IFirebase>);
-   const [user, loadingUser] = useAuthState(auth);
+   const [user] = useAuthState(auth);
 
    const [signOut] = useSignOut(auth);
 
@@ -30,7 +30,7 @@ const Header = () => {
                </div>
 
                <div className='header_right'>
-                  <BurgerMenu loadingUser={loadingUser} user={user} signOut={signOut} value={value} />
+                  <BurgerMenu user={user} signOut={signOut} value={value} />
 
                   {!user && (
                      // If user not logging

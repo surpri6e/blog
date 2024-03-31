@@ -18,15 +18,18 @@ const SettingsPage = () => {
    const navigate = useNavigate();
 
    const [socialUrl, setSocialUrl] = useState('');
-   const [about, setAbout] = useState('');
-   const [name, setName] = useState('');
-
-   console.log(user);
-
    const [isLinkError, setIsLinkError] = useState(false);
+
+   const [name, setName] = useState('');
+   const [isNameError, setIsNameError] = useState(false);
+
+   const [about, setAbout] = useState('');
+
+   //const [photo, setPhoto] = useState<File>();
 
    useEffect(() => {
       setSocialUrl(value?.socialUrl ? value.socialUrl : '');
+      setName(value?.name ? value.name : '');
       setAbout(value?.about ? value.about : '');
    }, [value]);
 
@@ -37,14 +40,16 @@ const SettingsPage = () => {
                <div className='settings_forms'>
                   {(loadingUser || loading) && <Loader />}
 
-                  {(error || errorUser) && <div className='other-text'>Что-то пошло не так.</div>}
+                  {(error || errorUser) && !(loadingUser || loading) && <div className='other-text'>Что-то пошло не так.</div>}
 
-                  {user && value && (
+                  {!(user && value) && !(loadingUser || loading) && !(error || errorUser) && <div className='other-text'>Ваш профиль еще не создан.</div>}
+
+                  {user && value && !(loadingUser || loading) && (
                      <>
                         <div className='settings_block'>
                            <div className='create_text'>Социальная ссылка:</div>
-                           {isLinkError && <HelpWindow title='Это не ссылка' />}
 
+                           {isLinkError && <HelpWindow title='Это не ссылка' />}
                            <input
                               type='text'
                               value={socialUrl}
@@ -52,6 +57,13 @@ const SettingsPage = () => {
                               onChange={(e) => setSocialUrl(e.target.value)}
                               placeholder='https://www.com'
                            />
+                        </div>
+
+                        <div className='settings_block'>
+                           <div className='create_text'>Имя:</div>
+
+                           {isNameError && <HelpWindow title='У вас должно быть имя' />}
+                           <input type='text' value={name} className='inputs' onChange={(e) => setName(e.target.value)} placeholder='Твое имя' />
                         </div>
 
                         <div className='settings_block'>
@@ -68,13 +80,16 @@ const SettingsPage = () => {
                               className='buttons buttons--green'
                               // Update user's information
                               onClick={async () => {
-                                 if (isLink(socialUrl)) {
-                                    await setUserUpdate({ ...value, socialUrl, about });
-                                    navigate(`/a/${user.displayName ? user.displayName : user.uid}`);
+                                 if (isLink(socialUrl) && name.length > 0) {
+                                    await setUserUpdate({ ...value, socialUrl, about, name });
+                                    navigate(`/a/${user.uid}`);
                                  } else {
                                     setIsLinkError(true);
+                                    setIsNameError(true);
+
                                     setTimeout(() => {
                                        setIsLinkError(false);
+                                       setIsNameError(false);
                                     }, 2000);
                                  }
                               }}
@@ -84,8 +99,6 @@ const SettingsPage = () => {
                         </div>
                      </>
                   )}
-
-                  {!(loadingUser || loading) && !(error || errorUser) && <div className='other-text'>Ваш профиль еще не создан.</div>}
                </div>
             </div>
          </div>

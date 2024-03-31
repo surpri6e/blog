@@ -14,7 +14,7 @@ import { IFirebase } from '../../types/IFirebase';
 import deafultAvatar from '../../images/defaultAvatar.png';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useEffect, useState } from 'react';
-import { createNewUser } from '../../api/FirebaseApi';
+import { createNewUser, setUserUpdate } from '../../api/FirebaseApi';
 
 const MainPage = () => {
    const { nickname } = useParams();
@@ -23,6 +23,16 @@ const MainPage = () => {
    const [user, loadingUser, errorUser] = useAuthState(auth);
 
    const [isYourProfile, setIsYourProfile] = useState(false);
+
+   useEffect(() => {
+      if (value) {
+         setUserUpdate({
+            ...value,
+            watchers: value.watchers + 1,
+         });
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [loading]);
 
    // Check on your account
    useEffect(() => {
@@ -56,6 +66,7 @@ const MainPage = () => {
                            <Avatar imageUrl={value.imageUrl ? value.imageUrl : deafultAvatar} socialUrl={value.socialUrl} />
                            <Name name={value.name} />
                            <About about={value.about} />
+                           <div className='other-text'>Просмотрено раз: {value.watchers}</div>
                         </div>
                         <Blocks blocks={value.blocks} isYourProfile={isYourProfile} value={value} />
                      </>
