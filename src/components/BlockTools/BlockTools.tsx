@@ -45,7 +45,10 @@ const BlockTools: FC<IBlockTools> = ({ value, ind }) => {
             className='buttons buttons--small'
             // Do block private or not
             onClick={async () => {
-               value.blocks[ind] = { ...value.blocks[ind], isPrivate: !value.blocks[ind].isPrivate };
+               value.blocks[ind] = {
+                  ...value.blocks[ind],
+                  isPrivate: !value.blocks[ind].isPrivate,
+               };
                await setUserUpdate({ ...value });
             }}
          >

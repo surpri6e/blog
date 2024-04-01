@@ -1,7 +1,7 @@
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { IFirebase } from '../../types/IFirebase';
 import './SettingsPage.scss';
-import { auth, database } from '../../main';
+import { auth, database, storage } from '../../main';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { DocumentReference, doc } from 'firebase/firestore';
 import Loader from '../../components/Loader/Loader';
@@ -10,10 +10,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import { setUserUpdate } from '../../api/FirebaseApi';
 import HelpWindow from '../../components/HelpWindow/HelpWindow';
 import { isLink } from '../../utils/isLink';
+import { formatBytesToBytes } from 'bytes-transform';
+import { useUploadFile } from 'react-firebase-hooks/storage';
+import { ref } from 'firebase/storage';
+import { configFirebase } from '../../config';
 
 const SettingsPage = () => {
    const [user, loadingUser, errorUser] = useAuthState(auth);
    const [value, loading, error] = useDocumentData<IFirebase>(doc(database, 'users', user?.uid ? user.uid : ' ') as DocumentReference<IFirebase>);
+   const [uploadFile] = useUploadFile();
 
    const navigate = useNavigate();
 
@@ -25,13 +30,22 @@ const SettingsPage = () => {
 
    const [about, setAbout] = useState('');
 
-   //const [photo, setPhoto] = useState<File>();
+   const [photo, setPhoto] = useState<File>();
+   const [isPhotoError, setIsPhotoError] = useState(false);
 
    useEffect(() => {
       setSocialUrl(value?.socialUrl ? value.socialUrl : '');
       setName(value?.name ? value.name : '');
       setAbout(value?.about ? value.about : '');
    }, [value]);
+
+   useEffect(() => {
+      if ((photo && photo.size > formatBytesToBytes(3, 'MB')) || (photo && photo.type != 'image/png' && photo.type != 'image/jpeg')) {
+         setIsPhotoError(true);
+      } else {
+         setIsPhotoError(false);
+      }
+   }, [photo]);
 
    return (
       <div className='settings'>
@@ -46,6 +60,20 @@ const SettingsPage = () => {
 
                   {user && value && !(loadingUser || loading) && (
                      <>
+                        <div className='settings_block'>
+                           <div className='create_text'>Фотография:</div>
+
+                           {isPhotoError && <HelpWindow title='Проверьте тип файла и его размер' />}
+                           <input
+                              type='file'
+                              className='inputs settings_photo'
+                              onChange={(e) => {
+                                 const file = e.target.files ? e.target.files[0] : undefined;
+                                 setPhoto(file);
+                              }}
+                           />
+                        </div>
+
                         <div className='settings_block'>
                            <div className='create_text'>Социальная ссылка:</div>
 
@@ -80,8 +108,30 @@ const SettingsPage = () => {
                               className='buttons buttons--green'
                               // Update user's information
                               onClick={async () => {
+                                 if (photo && !isPhotoError) {
+                                    await uploadFile(ref(storage, `${user.uid}.png`), photo, {
+                                       contentType: 'image/png',
+                                    });
+                                 }
+
                                  if (isLink(socialUrl) && name.length > 0) {
-                                    await setUserUpdate({ ...value, socialUrl, about, name });
+                                    if (photo && !isPhotoError) {
+                                       await setUserUpdate({
+                                          ...value,
+                                          socialUrl,
+                                          about,
+                                          name,
+                                          imageUrl: `https://firebasestorage.googleapis.com/v0/b/${configFirebase.storageBucket}/o/${user.uid}.png?alt=media`,
+                                       });
+                                    } else {
+                                       await setUserUpdate({
+                                          ...value,
+                                          socialUrl,
+                                          about,
+                                          name,
+                                       });
+                                    }
+
                                     navigate(`/a/${user.uid}`);
                                  } else {
                                     setIsLinkError(true);

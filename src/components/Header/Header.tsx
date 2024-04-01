@@ -22,11 +22,14 @@ const Header = () => {
          <div className='_Container'>
             <div className='header_body'>
                <div className='header_left'>
-                  {value && value.blocks.filter((elem) => elem.isFixed).length > 0 ? (
+                  {user?.uid === nickname && value && value.blocks.filter((elem) => elem.isFixed).length > 0 ? (
                      <FixedMessages blocks={fixMessages(value.blocks)} />
+                  ) : user?.uid != nickname && value && value.blocks.filter((elem) => !elem.isPrivate).filter((elem) => elem.isFixed).length > 0 ? (
+                     <FixedMessages blocks={fixMessages(value.blocks.filter((elem) => !elem.isPrivate))} />
                   ) : (
                      <div className='other-text'>Нет закрепленных сообщений.</div>
                   )}
+                  {/* {value && value.blocks.filter((elem) => elem.isFixed).length === 0 && <div className='other-text'>Нет закрепленных сообщений.</div>} */}
                </div>
 
                <div className='header_right'>
