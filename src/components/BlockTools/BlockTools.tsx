@@ -2,6 +2,8 @@ import { FC, useState } from 'react';
 import './BlockTools.scss';
 import { IFirebase } from '../../types/IFirebase';
 import { setUserUpdate } from '../../api/FirebaseApi';
+import { getStorage, ref, deleteObject } from 'firebase/storage';
+import { storage } from '../../main';
 
 interface IBlockTools {
    value: IFirebase;
@@ -11,6 +13,8 @@ interface IBlockTools {
 const BlockTools: FC<IBlockTools> = ({ value, ind }) => {
    const [isWantDelete, setIsWantDelete] = useState<boolean>(false);
 
+   // and delte photo from post in storage
+
    return isWantDelete ? (
       <div className='block-tools'>
          <div
@@ -18,7 +22,18 @@ const BlockTools: FC<IBlockTools> = ({ value, ind }) => {
             // Delete block from list
             onClick={async () => {
                value.blocks.splice(ind, 1);
-               await setUserUpdate({ ...value });
+
+               if (value.blocks[ind].image) {
+                  await deleteObject(ref(storage, value.blocks[ind].image)).then(async () => {
+                     await setUserUpdate({ ...value });
+                  });
+                  // .catch((error) => {
+                  //    // Uh-oh, an error occurred!
+                  // });
+               } else {
+                  await setUserUpdate({ ...value });
+               }
+
                setIsWantDelete(false);
             }}
          >

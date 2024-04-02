@@ -9,7 +9,15 @@
    }
 }
 
+.blocks_photo {
+   cursor: pointer;
+}
+
 .blocks_form {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+
    & > *:not(:last-child) {
       margin-bottom: 20px;
    }

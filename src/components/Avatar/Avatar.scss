@@ -3,11 +3,19 @@
    height: 150px;
    border-radius: 50%;
 
+   object-fit: cover;
+
    filter: grayscale(0.5);
 
    transition: all 150ms linear;
 
    &:hover {
+      filter: grayscale(0);
+   }
+}
+
+@media screen and (max-width: 1000px) {
+   .avatar {
       filter: grayscale(0);
    }
 }

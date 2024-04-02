@@ -9,7 +9,7 @@ interface IBlockTools {
    ind: number;
 }
 
-const Block: FC<IBlock & IBlockTools> = ({ title, date, message, isFixed, isPrivate, value, isYourProfile, ind }) => {
+const Block: FC<IBlock & IBlockTools> = ({ title, date, message, isFixed, isPrivate, value, isYourProfile, ind, image }) => {
    return isYourProfile ? (
       <div className='block' id={`${isFixed ? `anchor-${ind}` : ''}`}>
          {isYourProfile && <BlockTools ind={ind} value={value} />}
@@ -27,6 +27,7 @@ const Block: FC<IBlock & IBlockTools> = ({ title, date, message, isFixed, isPriv
             <b>({title}) </b>
             {message}
          </div>
+         {image && <img src={image} alt='Block image' className='block_image' />}
       </div>
    ) : !isYourProfile && isPrivate ? (
       <></>
@@ -46,6 +47,7 @@ const Block: FC<IBlock & IBlockTools> = ({ title, date, message, isFixed, isPriv
             <b>({title}) </b>
             {message}
          </div>
+         {image && <img src={image} alt='Block image' className='block_image' />}
       </div>
    );
 };

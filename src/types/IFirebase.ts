@@ -15,6 +15,7 @@ export interface IBlock {
    message: string;
    isFixed: boolean;
    isPrivate: boolean;
+   image?: string;
 }
 
 export interface IName {

@@ -108,17 +108,29 @@ const SettingsPage = () => {
                               className='buttons buttons--green'
                               // Update user's information
                               onClick={async () => {
-                                 if (photo && !isPhotoError) {
-                                    await uploadFile(ref(storage, `${user.uid}.png`), photo, {
-                                       contentType: 'image/png',
-                                    });
+                                 if (!(name.length > 0)) {
+                                    setIsNameError(true);
+                                    setTimeout(() => {
+                                       setIsNameError(false);
+                                    }, 2000);
                                  }
 
-                                 if (isLink(socialUrl) && name.length > 0) {
-                                    if (photo && !isPhotoError) {
+                                 if (!isLink(socialUrl)) {
+                                    setIsLinkError(true);
+                                    setTimeout(() => {
+                                       setIsLinkError(false);
+                                    }, 2000);
+                                 }
+
+                                 if (isLink(socialUrl) && name.length > 0 && !isPhotoError) {
+                                    if (photo) {
+                                       await uploadFile(ref(storage, `${user.uid}.png`), photo, {
+                                          contentType: 'image/png',
+                                       });
+
                                        await setUserUpdate({
                                           ...value,
-                                          socialUrl,
+                                          socialUrl: socialUrl.length === 0 ? '#' : socialUrl,
                                           about,
                                           name,
                                           imageUrl: `https://firebasestorage.googleapis.com/v0/b/${configFirebase.storageBucket}/o/${user.uid}.png?alt=media`,
@@ -126,21 +138,12 @@ const SettingsPage = () => {
                                     } else {
                                        await setUserUpdate({
                                           ...value,
-                                          socialUrl,
+                                          socialUrl: socialUrl.length === 0 ? '#' : socialUrl,
                                           about,
                                           name,
                                        });
                                     }
-
                                     navigate(`/a/${user.uid}`);
-                                 } else {
-                                    setIsLinkError(true);
-                                    setIsNameError(true);
-
-                                    setTimeout(() => {
-                                       setIsLinkError(false);
-                                       setIsNameError(false);
-                                    }, 2000);
                                  }
                               }}
                            >

@@ -71,14 +71,6 @@
    width: 500px;
 }
 
-.inputs--width {
-   font-size: 16px;
-   border: 1px solid $black;
-   border-radius: 5px;
-   padding: 10px;
-   width: 100%;
-}
-
 @media screen and (max-width: $bp) {
    .inputs {
       width: 350px;
