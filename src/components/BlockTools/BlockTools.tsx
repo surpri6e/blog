@@ -13,8 +13,6 @@ interface IBlockTools {
 const BlockTools: FC<IBlockTools> = ({ value, ind }) => {
    const [isWantDelete, setIsWantDelete] = useState<boolean>(false);
 
-   // and delte photo from post in storage
-
    return isWantDelete ? (
       <div className='block-tools'>
          <div
@@ -55,7 +53,7 @@ const BlockTools: FC<IBlockTools> = ({ value, ind }) => {
 
          <div
             className='buttons buttons--small'
-            // Do block private or not
+            // Do block private or public
             onClick={async () => {
                value.blocks[ind] = {
                   ...value.blocks[ind],

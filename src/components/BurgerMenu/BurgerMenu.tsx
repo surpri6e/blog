@@ -6,11 +6,11 @@ import { IFirebase } from '../../types/IFirebase';
 
 interface IBurgerMenu {
    user: User | null | undefined;
-   value: IFirebase | undefined;
    signOut: () => Promise<boolean>;
+   valueUser: IFirebase | undefined;
 }
 
-const BurgerMenu: FC<IBurgerMenu> = ({ user, signOut, value }) => {
+const BurgerMenu: FC<IBurgerMenu> = ({ user, signOut, valueUser }) => {
    return (
       <div className='menu'>
          <input type='checkbox' id='burger-checkbox' className='burger-checkbox' />
@@ -35,7 +35,7 @@ const BurgerMenu: FC<IBurgerMenu> = ({ user, signOut, value }) => {
                   </li>
 
                   {/* If user has profile */}
-                  {value && (
+                  {valueUser && (
                      <li>
                         <Link to={'/settings'} className='menu-item'>
                            Настройки

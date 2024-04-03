@@ -13,7 +13,10 @@ const Header = () => {
    const { nickname } = useParams();
 
    const [value] = useDocumentData<IFirebase>(doc(database, 'users', nickname ? nickname : ' ') as DocumentReference<IFirebase>);
+
    const [user] = useAuthState(auth);
+
+   const [valueUser] = useDocumentData<IFirebase>(doc(database, 'users', user?.uid ? user.uid : ' ') as DocumentReference<IFirebase>);
 
    const [signOut] = useSignOut(auth);
 
@@ -32,7 +35,7 @@ const Header = () => {
                </div>
 
                <div className='header_right'>
-                  <BurgerMenu user={user} signOut={signOut} value={value} />
+                  <BurgerMenu user={user} signOut={signOut} valueUser={valueUser} />
 
                   {!user && (
                      // If user not logging
@@ -49,7 +52,7 @@ const Header = () => {
                         </Link>
 
                         {/* If user has profile */}
-                        {value && (
+                        {valueUser && (
                            <Link to={'/settings'} className='buttons'>
                               Настройки
                            </Link>
