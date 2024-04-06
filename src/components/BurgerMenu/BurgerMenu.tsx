@@ -1,4 +1,3 @@
-import { User } from 'firebase/auth';
 import './BurgerMenu.scss';
 import { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
