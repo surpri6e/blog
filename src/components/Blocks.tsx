@@ -21,14 +21,15 @@ interface IBlocks {
 const Blocks: FC<IBlocks> = ({ blocks, isYourProfile, value }) => {
    const [isPressed, setIsPressed] = useState(false);
 
+   const [message, setMessage] = useState('');
+
    const [title, setTitle] = useState('');
    const [isTitleError, setIsTitleError] = useState(false);
 
    const [uploadFile] = useUploadFile();
+
    const [photo, setPhoto] = useState<File>();
    const [isPhotoError, setIsPhotoError] = useState(false);
-
-   const [message, setMessage] = useState('');
 
    useEffect(() => {
       if ((photo && photo.size > formatBytesToBytes(3, 'MB')) || (photo && photo.type != 'image/png' && photo.type != 'image/jpeg')) {

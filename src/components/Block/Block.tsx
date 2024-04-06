@@ -1,15 +1,14 @@
 import { FC } from 'react';
 import './Block.scss';
-import { IBlock, IFirebase } from '../../types/IFirebase';
+import { IBlock } from '../../types/IFirebase';
 import BlockTools from '../BlockTools/BlockTools';
+import { IBlockTools } from '../../types/IBlockTools';
 
-interface IBlockTools {
-   value: IFirebase;
+interface IBlockAdditional {
    isYourProfile: boolean;
-   ind: number;
 }
 
-const Block: FC<IBlock & IBlockTools> = ({ title, date, message, isFixed, isPrivate, value, isYourProfile, ind, image }) => {
+const Block: FC<IBlock & IBlockTools & IBlockAdditional> = ({ title, date, message, isFixed, isPrivate, image, isYourProfile, ind, value }) => {
    return isYourProfile ? (
       <div className='block' id={`${isFixed ? `anchor-${ind}` : ''}`}>
          {isYourProfile && <BlockTools ind={ind} value={value} />}
@@ -33,8 +32,6 @@ const Block: FC<IBlock & IBlockTools> = ({ title, date, message, isFixed, isPriv
       <></>
    ) : (
       <div className='block' id={`${isFixed ? `anchor-${ind}` : ''}`}>
-         {isYourProfile && <BlockTools ind={ind} value={value} />}
-
          <div className='block_header'>
             <a className='block_title'>{title}</a>
             <div className='block_info'>

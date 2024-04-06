@@ -1,14 +1,15 @@
 import { Link } from 'react-router-dom';
 import './LoginIcon.scss';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../main';
+import { loginPath } from '../../constants';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 const LoginIcon = () => {
-   const [user, loading] = useAuthState(auth);
+   const { user, loadingUser } = useContext(AuthContext);
 
    return (
-      !(loading || user) && (
-         <Link to={'/login'} className='login-icon'>
+      !(loadingUser || user) && (
+         <Link to={loginPath} className='login-icon'>
             Я
          </Link>
       )

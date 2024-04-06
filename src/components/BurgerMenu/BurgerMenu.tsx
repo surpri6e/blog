@@ -1,16 +1,19 @@
 import { User } from 'firebase/auth';
 import './BurgerMenu.scss';
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { IFirebase } from '../../types/IFirebase';
+import { AuthContext } from '../../context/AuthContext';
+import { loginPath, settingsPath } from '../../constants';
 
 interface IBurgerMenu {
-   user: User | null | undefined;
-   signOut: () => Promise<boolean>;
    valueUser: IFirebase | undefined;
+   signOut: () => Promise<boolean>;
 }
 
-const BurgerMenu: FC<IBurgerMenu> = ({ user, signOut, valueUser }) => {
+const BurgerMenu: FC<IBurgerMenu> = ({ signOut, valueUser }) => {
+   const { user } = useContext(AuthContext);
+
    return (
       <div className='menu'>
          <input type='checkbox' id='burger-checkbox' className='burger-checkbox' />
@@ -19,7 +22,7 @@ const BurgerMenu: FC<IBurgerMenu> = ({ user, signOut, valueUser }) => {
             {!user && (
                // If user not logging
                <li>
-                  <Link to={'/login'} className='menu-item'>
+                  <Link to={loginPath} className='menu-item'>
                      Войти
                   </Link>
                </li>
@@ -37,7 +40,7 @@ const BurgerMenu: FC<IBurgerMenu> = ({ user, signOut, valueUser }) => {
                   {/* If user has profile */}
                   {valueUser && (
                      <li>
-                        <Link to={'/settings'} className='menu-item'>
+                        <Link to={settingsPath} className='menu-item'>
                            Настройки
                         </Link>
                      </li>

@@ -1,11 +1,10 @@
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { IFirebase } from '../../types/IFirebase';
 import './SettingsPage.scss';
-import { auth, database, storage } from '../../main';
+import { database, storage } from '../../main';
 import { useDocumentData } from 'react-firebase-hooks/firestore';
 import { DocumentReference, doc } from 'firebase/firestore';
 import Loader from '../../components/Loader/Loader';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { setUserUpdate } from '../../api/FirebaseApi';
 import HelpWindow from '../../components/HelpWindow/HelpWindow';
@@ -14,21 +13,22 @@ import { formatBytesToBytes } from 'bytes-transform';
 import { useUploadFile } from 'react-firebase-hooks/storage';
 import { ref } from 'firebase/storage';
 import { configFirebase } from '../../config';
+import { AuthContext } from '../../context/AuthContext';
 
 const SettingsPage = () => {
-   const [user, loadingUser, errorUser] = useAuthState(auth);
+   const { user, loadingUser, errorUser } = useContext(AuthContext);
    const [value, loading, error] = useDocumentData<IFirebase>(doc(database, 'users', user?.uid ? user.uid : ' ') as DocumentReference<IFirebase>);
    const [uploadFile] = useUploadFile();
 
    const navigate = useNavigate();
+
+   const [about, setAbout] = useState('');
 
    const [socialUrl, setSocialUrl] = useState('');
    const [isLinkError, setIsLinkError] = useState(false);
 
    const [name, setName] = useState('');
    const [isNameError, setIsNameError] = useState(false);
-
-   const [about, setAbout] = useState('');
 
    const [photo, setPhoto] = useState<File>();
    const [isPhotoError, setIsPhotoError] = useState(false);
@@ -56,7 +56,7 @@ const SettingsPage = () => {
 
                   {(error || errorUser) && !(loadingUser || loading) && <div className='other-text'>Что-то пошло не так.</div>}
 
-                  {!(user && value) && !(loadingUser || loading) && !(error || errorUser) && <div className='other-text'>Ваш профиль еще не создан.</div>}
+                  {!(user && value) && !(loadingUser || loading) && <div className='other-text'>Ваш профиль еще не создан.</div>}
 
                   {user && value && !(loadingUser || loading) && (
                      <>
@@ -143,6 +143,7 @@ const SettingsPage = () => {
                                           name,
                                        });
                                     }
+
                                     navigate(`/a/${user.uid}`);
                                  }
                               }}

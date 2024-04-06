@@ -1,4 +1,4 @@
-import { useAuthState, useSignOut } from 'react-firebase-hooks/auth';
+import { useSignOut } from 'react-firebase-hooks/auth';
 import './Header.scss';
 import { auth, database } from '../../main';
 import { Link, useParams } from 'react-router-dom';
@@ -8,14 +8,18 @@ import { DocumentReference, doc } from 'firebase/firestore';
 import FixedMessages from '../FixedMessages/FixedMessages';
 import { fixMessages } from '../../utils/fixMessages';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { useIsYourProfile } from '../../hooks/useIsYourProfile';
+import { loginPath, settingsPath } from '../../constants';
 
 const Header = () => {
    const { nickname } = useParams();
+   const { user } = useContext(AuthContext);
+
+   const isYourProfile = useIsYourProfile(nickname, user);
 
    const [value] = useDocumentData<IFirebase>(doc(database, 'users', nickname ? nickname : ' ') as DocumentReference<IFirebase>);
-
-   const [user] = useAuthState(auth);
-
    const [valueUser] = useDocumentData<IFirebase>(doc(database, 'users', user?.uid ? user.uid : ' ') as DocumentReference<IFirebase>);
 
    const [signOut] = useSignOut(auth);
@@ -25,9 +29,9 @@ const Header = () => {
          <div className='_Container'>
             <div className='header_body'>
                <div className='header_left'>
-                  {user?.uid === nickname && value && value.blocks.filter((elem) => elem.isFixed).length > 0 ? (
+                  {isYourProfile && value && value.blocks.filter((elem) => elem.isFixed).length > 0 ? (
                      <FixedMessages blocks={fixMessages(value.blocks)} />
-                  ) : user?.uid != nickname && value && value.blocks.filter((elem) => !elem.isPrivate).filter((elem) => elem.isFixed).length > 0 ? (
+                  ) : !isYourProfile && value && value.blocks.filter((elem) => !elem.isPrivate).filter((elem) => elem.isFixed).length > 0 ? (
                      <FixedMessages blocks={fixMessages(value.blocks.filter((elem) => !elem.isPrivate))} />
                   ) : (
                      <div className='other-text'>Нет закрепленных сообщений.</div>
@@ -35,11 +39,11 @@ const Header = () => {
                </div>
 
                <div className='header_right'>
-                  <BurgerMenu user={user} signOut={signOut} valueUser={valueUser} />
+                  <BurgerMenu signOut={signOut} valueUser={valueUser} />
 
                   {!user && (
                      // If user not logging
-                     <Link to={'/login'} className='buttons'>
+                     <Link to={loginPath} className='buttons'>
                         Войти
                      </Link>
                   )}
@@ -53,7 +57,7 @@ const Header = () => {
 
                         {/* If user has profile */}
                         {valueUser && (
-                           <Link to={'/settings'} className='buttons'>
+                           <Link to={settingsPath} className='buttons'>
                               Настройки
                            </Link>
                         )}

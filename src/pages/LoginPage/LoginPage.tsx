@@ -1,12 +1,15 @@
 import './LoginPage.scss';
-import { useAuthState, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import { auth } from '../../main';
 import Loader from '../../components/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
+import { linkOfCreator } from '../../constants';
 
 const LoginPage = () => {
    const [login, , loading, error] = useSignInWithGoogle(auth);
-   const [, loadingUser, errorUser] = useAuthState(auth);
+   const { loadingUser, errorUser } = useContext(AuthContext);
 
    const navigate = useNavigate();
 
@@ -27,7 +30,7 @@ const LoginPage = () => {
                            className='buttons'
                            onClick={async () => {
                               await login();
-                              navigate('/a/guUkSZJoq4ZP3ebzndmXct9m4f73');
+                              navigate(linkOfCreator);
                            }}
                         >
                            Продолжить с Гугл

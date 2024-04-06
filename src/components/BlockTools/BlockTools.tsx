@@ -1,14 +1,9 @@
 import { FC, useState } from 'react';
 import './BlockTools.scss';
-import { IFirebase } from '../../types/IFirebase';
 import { setUserUpdate } from '../../api/FirebaseApi';
 import { ref, deleteObject } from 'firebase/storage';
 import { storage } from '../../main';
-
-interface IBlockTools {
-   value: IFirebase;
-   ind: number;
-}
+import { IBlockTools } from '../../types/IBlockTools';
 
 const BlockTools: FC<IBlockTools> = ({ value, ind }) => {
    const [isWantDelete, setIsWantDelete] = useState<boolean>(false);
