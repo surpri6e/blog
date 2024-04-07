@@ -40,7 +40,7 @@ const SettingsPage = () => {
    }, [value]);
 
    useEffect(() => {
-      if ((photo && photo.size > formatBytesToBytes(3, 'MB')) || (photo && photo.type != 'image/png' && photo.type != 'image/jpeg')) {
+      if ((photo && photo.size > formatBytesToBytes(3, 'MB')) || (photo && photo.type !== 'image/png' && photo.type !== 'image/jpeg')) {
          setIsPhotoError(true);
       } else {
          setIsPhotoError(false);

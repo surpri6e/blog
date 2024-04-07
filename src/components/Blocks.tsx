@@ -32,7 +32,7 @@ const Blocks: FC<IBlocks> = ({ blocks, isYourProfile, value }) => {
    const [isPhotoError, setIsPhotoError] = useState(false);
 
    useEffect(() => {
-      if ((photo && photo.size > formatBytesToBytes(3, 'MB')) || (photo && photo.type != 'image/png' && photo.type != 'image/jpeg')) {
+      if ((photo && photo.size > formatBytesToBytes(3, 'MB')) || (photo && photo.type !== 'image/png' && photo.type !== 'image/jpeg')) {
          setIsPhotoError(true);
       } else {
          setIsPhotoError(false);
