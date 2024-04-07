@@ -26,7 +26,9 @@ const Block: FC<IBlock & IBlockTools & IBlockAdditional> = ({ title, date, messa
             <b>({title}) </b>
             {message}
          </div>
-         {image && <img src={image} alt='Block image' className='block_image' />}
+         <a href={image} className='block_image' target='_blank'>
+            {image && <img src={image} alt='Block image' />}
+         </a>
       </div>
    ) : !isYourProfile && isPrivate ? (
       <></>
@@ -44,7 +46,9 @@ const Block: FC<IBlock & IBlockTools & IBlockAdditional> = ({ title, date, messa
             <b>({title}) </b>
             {message}
          </div>
-         {image && <img src={image} alt='Block image' className='block_image' />}
+         <a href={image} className='block_image' target='_blank'>
+            {image && <img src={image} alt='Block image' />}
+         </a>
       </div>
    );
 };

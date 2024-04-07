@@ -26,10 +26,12 @@
 }
 
 .block_image {
-   width: 100%;
-   height: 200px;
-   margin-top: 20px;
-   object-fit: cover;
+   img {
+      width: 100%;
+      height: 250px;
+      margin-top: 20px;
+      object-fit: cover;
+   }
 }
 
 .block_title {
