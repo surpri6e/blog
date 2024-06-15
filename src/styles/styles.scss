@@ -23,6 +23,9 @@ body {
 
    overflow-x: hidden;
    position: fixed;
+
+   scroll-behavior: smooth;
+   scroll-padding-top: 99px;
 }
 
 ._Container {
